@@ -1,0 +1,25 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "fullscreen_mode": 1,
+    "geometry": {
+       "height": 767,
+       "width": 1365,
+       "x": 0,
+       "y": 0
+    },
+    "name": "i3: Layout saving in i3 - Chromium",
+    "percent": 1,
+    "swallows": [
+       {
+       "class": "^Chromium$",
+       "instance": "^chromium$",
+       "transient_for": "^$",
+       "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+

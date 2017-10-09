@@ -1,12 +1,17 @@
 #!/bin/bash
 
+LAYOUT_PATH=~/.config/i3/layouts
+
 WORKSPACENAME=$1
+LAYOUT=$2
+
 
 if i3-msg -t get_workspaces | jq ".[] | .name" | grep -q -w "$WORKSPACENAME"; then
     i3-msg "workspace $WORKSPACENAME"
 else
-    for var in ${@:2}
+    i3-msg "workspace $WORKSPACENAME; append_layout $LAYOUT_PATH/$LAYOUT.json"
+    for i in "${@:3}"
     do
-        $($var)
+        $($i)&
     done
 fi

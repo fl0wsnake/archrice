@@ -1,0 +1,78 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 747,
+       "width": 681,
+       "x": 684,
+       "y": 1
+    },
+    "name": "Thumbs up - Google Play Music",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Chromium$",
+       "instance": "^play\\.google\\.com__music_listen$",
+       "transient_for": "^$",
+       "window_role": "^pop\\-up$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 749,
+               "width": 1366,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Pandora Radio - Listen to Free Internet Radio, Find New Music",
+            "percent": 0.8,
+            "swallows": [
+               {
+               "class": "^Chromium$",
+               "instance": "^www\\.pandora\\.com$",
+               "transient_for": "^$",
+               "window_role": "^pop\\-up$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 362,
+               "width": 562,
+               "x": 0,
+               "y": 0
+            },
+            "name": "cava",
+            "percent": 0.2,
+            "swallows": [
+               {
+               "class": "^Termite$",
+               "instance": "^termite$",
+               "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ./places.sh
+rm -rf $backupdir/*
 
 for i in "${places[@]}"
 do
