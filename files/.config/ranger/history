@@ -1,0 +1,3 @@
+shell cp ranger ~/.config/ranger
+shell cp
+shell cp ranger/* ~/.config/ranger/

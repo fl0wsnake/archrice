@@ -1,0 +1,12 @@
+#!/bin/bash
+
+WORKSPACENAME=$1
+
+if i3-msg -t get_workspaces | jq ".[] | .name" | grep -q -w "$WORKSPACENAME"; then
+    i3-msg "workspace $WORKSPACENAME"
+else
+    for var in ${@:2}
+    do
+        $($var)
+    done
+fi

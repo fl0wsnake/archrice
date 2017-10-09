@@ -1,0 +1,5 @@
+#!/bin/bash
+
+TOUCHPAD_ID=$(xinput list | grep -i touchpad | grep -Po '(?<=id=)[0-9]+')
+# xinput --disable ${TOUCHPAD_ID:=15}
+xinput set-prop ${TOUCHPAD_ID:=15} "Device Enabled" 0
