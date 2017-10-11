@@ -2,6 +2,15 @@
 # ~/.xprofile
 #
 
+path_addition=""
+path_addition+=~/.yarn/bin
+path_addition+=":"
+path_addition+=~/.local/bin
+path_addition+=":"
+path_addition+=~/.config/scripts
+path_addition+=":"
+export PATH=$path_addition$PATH
+
 export BROWSER=/usr/bin/chromium
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim

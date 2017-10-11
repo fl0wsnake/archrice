@@ -1,14 +1,12 @@
 # There are the packages used in this i3 config:
-# interface:
-# ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar
-# utilities:
-# jq-git scrot cava
-# drivers:
+# * interface:
+# ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3
+# * drivers:
 # xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light
-# pacakges that might come in handy:
-# perl-anyevent-i3 xorg-xprop
-# just some pacakges i use
-# gcolor2
+# * some packages that might come in handy:
+# perl-anyevent-i3 xorg-xprop gcolor2 jq-git scrot cava
+# * apps
+# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most
 
 set $i3dir ~/.config/i3/
 set $term termite
@@ -48,9 +46,13 @@ font pango:DejaVu Sans Mono 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# terminal, explrer and editor shortcuts
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+Return exec $term -d "`xcwd`"
+bindsym $mod+Shift+Return exec $term -d "$(xcwd)"
+bindsym $mod+v exec $term -e \'${EDITOR:=$VISUAL}\'
+bindsym $mod+Shift+v exec $term -d "`xcwd`" -e \'${EDITOR:=$VISUAL}\'
+bindsym $mod+x exec $term -e ranger
+bindsym $mod+Shift+x exec $term -d "`xcwd`" -e ranger
 
 # kill focused window
 bindsym $mod+q kill
@@ -157,6 +159,11 @@ bindsym $mod+Shift+8 move container to workspace $eighth_workspace
 bindsym $mod+Shift+9 move container to workspace $ninth_workspace
 bindsym $mod+Shift+0 move container to workspace $tenth_workspace
 
+# workspace app assignments
+assign [class="Discord"] $chat_workspace
+assign [class="Telegram"] $chat_workspace
+assign [class="Skype"] $chat_workspace
+
 # resize mode
 mode "resize" {
     bindsym h resize shrink width 10 px or 10 ppt
@@ -199,12 +206,6 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# explrer and editor shortcuts
-bindsym $mod+v exec $term -e \'${EDITOR:=$VISUAL}\'
-bindsym $mod+Shift+v exec $term -d "`xcwd`" -e \'${EDITOR:=$VISUAL}\'
-bindsym $mod+x exec $term -e ranger
-bindsym $mod+Shift+x exec $term -d "`xcwd`" -e ranger
-
 # bars
 hide_edge_borders smart
 new_window pixel 1
@@ -227,5 +228,6 @@ exec --no-startup-id unclutter --timeout 1
 exec compton -f -D 1
 exec udiskie
 exec dropboxd
+exec ~/apps/org_backup/org-watch-log
 
 exec i3-msg workspace $first_workspace
