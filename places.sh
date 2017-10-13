@@ -9,6 +9,7 @@ declare -a places=(
 ".config/termite"
 ".config/cava"
 ".config/scripts"
+".config/gtk-3.0"
 
 ".config/.Xresources"
 ".config/compton.conf"

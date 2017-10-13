@@ -1,4 +1,4 @@
-// vim:ts=4:sw=4:et
+/NERDTreeFind/ vim:ts=4:sw=4:et
 {
     "border": "pixel",
     "current_border_width": 1,
@@ -40,14 +40,13 @@
                "x": 0,
                "y": 0
             },
-            "name": "Pandora Radio - Listen to Free Internet Radio, Find New Music",
+            "name": "Pandora Radio",
             "percent": 0.8,
             "swallows": [
                {
-               "class": "^Chromium$",
-               "instance": "^www\\.pandora\\.com$",
-               "transient_for": "^$",
-               "window_role": "^pop\\-up$"
+               "class": "^Termite$",
+               "instance": "^termite$",
+               "transient_for": "^$"
                }
             ],
             "type": "con"

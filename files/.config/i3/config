@@ -2,11 +2,11 @@
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * drivers:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset
 # * some packages that might come in handy:
 # perl-anyevent-i3 xorg-xprop gcolor2 jq-git scrot cava
 # * apps
-# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most
+# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar
 
 set $i3dir ~/.config/i3/
 set $term termite
@@ -15,8 +15,6 @@ set $mode_system (c)reload, (C)restart, Lock, Shutdown, Reboot, (e)logout, (S)su
 mode "$mode_system" {
     bindsym c reload
     bindsym Shift+c restart
-    # bindsym k [class=".*"] kill, mode "default"
-    # bindsym t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
     bindsym l exec --no-startup-id i3lock-fancy, mode "default"
     bindsym e [class=".*"] kill, exit, mode "default"
     bindsym Shift+s exec --no-startup-id i3lock-fancy && systemctl suspend, mode "default"
@@ -39,10 +37,10 @@ floating_modifier $mod
 # terminal, explrer and editor shortcuts
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec $term -d "$(xcwd)"
-bindsym $mod+e exec $term -e \'${EDITOR:=$VISUAL}\'
-bindsym $mod+Shift+e exec $term -d "`xcwd`" -e \'${EDITOR:=$VISUAL} .\'
+bindsym $mod+e exec $term -e "${EDITOR:=$VISUAL}"
+bindsym $mod+Shift+e exec $term -d "$(xcwd)" -e "${EDITOR:=$VISUAL} ."
 bindsym $mod+x exec $term -e ranger
-bindsym $mod+Shift+x exec $term -d "`xcwd`" -e ranger
+bindsym $mod+Shift+x exec $term -d "$(xcwd)" -e "ranger ."
 # kill focused window
 bindsym $mod+q kill
 bindsym $mod+Shift+q [class=".*"] kill
@@ -82,15 +80,16 @@ bindsym $mod+m layout toggle split
 bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-# focus the parent container
+# not sure if I need these
 bindsym $mod+t focus parent
-# focus the child container
 bindsym $mod+g focus child
 # workspace declarations
 set $todos_workspace 50:
 set $music_workspace 51:
 set $browser_workspace 52:
 set $chat_workspace 53:
+set $trash_workspace 54:
+# numerical
 set $first_workspace 101:1
 set $second_workspace 102:2
 set $third_workspace 103:3
@@ -102,11 +101,12 @@ set $eighth_workspace 108:8
 set $ninth_workspace 109:9
 set $tenth_workspace 110:10
 # switch to workspace
-bindsym $mod+a exec $i3dir/workspace_init $todos_workspace todos emacs
-bindsym $mod+w exec $i3dir/workspace_init $browser_workspace browser chromium
-bindsym $mod+c exec $i3dir/workspace_init $chat_workspace chats telegram-desktop
-bindsym $mod+r exec $i3dir/music_init $music_workspace music $i3dir $term
-# numerical workspaces
+bindsym $mod+a exec --no-startup-id $i3dir/init_layout $todos_workspace todos emacs
+bindsym $mod+w exec --no-startup-id $i3dir/init_layout $browser_workspace browser chromium
+bindsym $mod+c exec --no-startup-id $i3dir/init_layout $chat_workspace chats telegram-desktop
+bindsym $mod+r exec --no-startup-id $i3dir/music_init $music_workspace music $term
+bindsym $mod+s exec --no-startup-id $i3dir/init_workspace $trash_workspace 'i3-msg 'layout tabbed''
+# numerical
 bindsym $mod+1 workspace $first_workspace
 bindsym $mod+2 workspace $second_workspace
 bindsym $mod+3 workspace $third_workspace
@@ -148,30 +148,31 @@ bindsym $mod+u resize grow height 10 px or 10 ppt
 bindsym $mod+i resize shrink height 10 px or 10 ppt
 bindsym $mod+o resize grow width 10 px or 10 ppt
 # keyboard layout (input languages)
-exec setxkbmap -layout us,ru,uk
-bindsym $mod+Control+1 exec setxkbmap us
-bindsym $mod+Control+2 exec setxkbmap ru
-bindsym $mod+Control+3 exec setxkbmap ua
+exec --no-startup-id setxkbmap -layout us,ru,uk
+bindsym $mod+Control+1 exec --no-startup-id setxkbmap us
+bindsym $mod+Control+2 exec --no-startup-id setxkbmap ru
+bindsym $mod+Control+3 exec --no-startup-id setxkbmap ua
 # screenshots
-bindsym Print exec scrot ~/images/screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym Print exec --no-startup-id scrot ~/images/screenshots/%Y-%m-%d-%T-screenshot.png
 # laptp fn key bindings
 # pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 # sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 10
-bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 # media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # borders
 hide_edge_borders smart
 new_window pixel 1
 # gaps
-exec_always --no-startup-id i3-msg gaps inner all set 2
+smart_gaps on
+exec_always i3-msg gaps inner all set 2
 # colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #ffffff   #d97d19
@@ -182,23 +183,18 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 # startup commands
+exec_always --no-startup-id xrdb ~/.config/.Xresources && ~/.config/polybar/launch
+# no beep
+exec_always --no-startup-id xset -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xmodmap ~/.config/keymap
 exec --no-startup-id $i3dir/touchpad_disable
-exec --no-startup-id xrdb ~/.config/.Xresources
-exec_always --no-startup-id xset -b
 exec --no-startup-id feh --bg-scale ~/.config/wall.png
 exec --no-startup-id unclutter --timeout 1
 exec --no-startup-id compton
 exec --no-startup-id udiskie
-# bar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-# bar {
-    # status_command i3status
-    # strip_workspace_numbers yes
-# }
 
-exec dropboxd
-exec ~/apps/org_backup/org-watch-log
+exec --no-startup-id dropboxd
+exec --no-startup-id ~/apps/org_backup/org-watch-log
 
 exec i3-msg workspace $first_workspace

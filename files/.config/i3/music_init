@@ -1,13 +1,12 @@
 #!/bin/bash
 
-LAYOUT_PATH=~/.config/i3/layouts
+I3_DIR=~/.config/i3
 WORKSPACENAME=$1
 LAYOUT=$2
-I3_DIR=$3
-TERM=$4
+TERM=$3
 
 cava="$TERM -e cava"
-pandora="chromium --app=https://www.pandora.com"
+pandora="$TERM -e pianobar"
 player="chromium --app=https://play.google.com/music/listen#/ap/auto-playlist-thumbs-up"
 
-$I3_DIR/workspace_init "$WORKSPACENAME" "$LAYOUT" "$cava" "$pandora" "$player"
+$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$cava" "$pandora" "$player"
