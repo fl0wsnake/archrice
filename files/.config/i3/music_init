@@ -9,4 +9,4 @@ cava="$TERM -e cava"
 pandora="$TERM -e pianobar"
 player="chromium --app=https://play.google.com/music/listen#/ap/auto-playlist-thumbs-up"
 
-$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$cava" "$pandora" "$player"
+$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$pandora" "$cava" "$player"
