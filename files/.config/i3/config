@@ -105,7 +105,7 @@ bindsym $mod+a exec --no-startup-id $i3dir/init_layout $todos_workspace todos em
 bindsym $mod+w exec --no-startup-id $i3dir/init_layout $browser_workspace browser chromium
 bindsym $mod+c exec --no-startup-id $i3dir/init_layout $chat_workspace chats telegram-desktop
 bindsym $mod+r exec --no-startup-id $i3dir/music_init $music_workspace music $term
-bindsym $mod+s exec --no-startup-id $i3dir/init_workspace $trash_workspace 'i3-msg 'layout tabbed''
+bindsym $mod+s workspace $trash_workspace, layout tabbed
 # numerical
 bindsym $mod+1 workspace $first_workspace
 bindsym $mod+2 workspace $second_workspace
