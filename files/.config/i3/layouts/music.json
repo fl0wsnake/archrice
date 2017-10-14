@@ -1,67 +1,13 @@
 
 // vim:ts=4:sw=4:et
 {
-    "border": "pixel",
-    "current_border_width": 1,
-    "floating": "auto_off",
-    "geometry": {
-       "height": 752,
-       "width": 1366,
-       "x": 0,
-       "y": 0
-    },
-    "name": "Thumbs up - Google Play Music",
-    "percent": 0.6,
-    "swallows": [
-       {
-       "class": "^Chromium$",
-       "instance": "^play\\.google\\.com__music_listen$",
-       "transient_for": "^$",
-       "window_role": "^pop\\-up$"
-       }
-    ],
-    "type": "con"
-}
-
-{
     // splitv split container with 2 children
     "border": "pixel",
     "floating": "auto_off",
     "layout": "splitv",
-    "percent": 0.4,
+    "percent": 1,
     "type": "con",
     "nodes": [
-        {
-            // splitv split container with 1 children
-            "border": "pixel",
-            "floating": "auto_off",
-            "layout": "splitv",
-            "percent": 0.5,
-            "type": "con",
-            "nodes": [
-                {
-                    "border": "pixel",
-                    "current_border_width": 1,
-                    "floating": "auto_off",
-                    "geometry": {
-                       "height": 360,
-                       "width": 560,
-                       "x": 0,
-                       "y": 0
-                    },
-                    "name": "termite",
-                    "percent": 1,
-                    "swallows": [
-                       {
-                       "class": "^Termite$",
-                       "instance": "^termite$",
-                       "transient_for": "^$"
-                       }
-                    ],
-                    "type": "con"
-                }
-            ]
-        },
         {
             "border": "pixel",
             "current_border_width": 1,
@@ -73,7 +19,7 @@
                "y": 0
             },
             "name": "cava",
-            "percent": 0.5,
+            "percent": 0.2,
             "swallows": [
                {
                "class": "^Termite$",
@@ -82,6 +28,36 @@
                }
             ],
             "type": "con"
+        },
+        {
+            // tabbed split container with 2 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "tabbed",
+            "percent": 0.8,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 1,
+                    "floating": "user_off",
+                    "geometry": {
+                       "height": 360,
+                       "width": 560,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "termite",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                       "class": ".*",
+                       "transient_for": "^$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
         }
     ]
 }

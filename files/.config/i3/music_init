@@ -3,10 +3,14 @@
 I3_DIR=~/.config/i3
 WORKSPACENAME=$1
 LAYOUT=$2
-TERM=$3
+TERMINAL=$3
 
-cava="$TERM -e cava"
-pandora="$TERM -e pianobar"
-player="chromium --app=https://play.google.com/music/listen#/ap/auto-playlist-thumbs-up"
+cava="$TERMINAL -e cava"
+pandora="sleep 0.4 && $TERMINAL -e pianobar"
+# player="chromium --app=https://play.google.com/music/listen#/ap/auto-playlist-thumbs-up"
+# player="sleep 0.6 && spotify"
+player="sleep 0.4 && spotify"
+focus="sleep 1.6 && i3-msg focus right"
 
-$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$pandora" "$cava" "$player"
+$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$player" "$cava" "$pandora" "$focus"
+

@@ -1,9 +1,12 @@
 #!/bin/bash
 
 source ./places.sh
-rm -rf $backupdir/*
+rm -rf $backupdir
+mkdir -p $backupdir/.config
 
 for i in "${places[@]}"
 do
-    cp -r ~/$i $(realpath $backupdir/$(dirname $i))
+    # echo ~/$i
+    # echo $(realpath $backupdir/$(dirname $i))
+    cp -r ~/$i $(realpath $backupdir/$i)
 done

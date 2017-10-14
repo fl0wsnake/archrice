@@ -1,7 +1,6 @@
 #!/bin/bash
 
 I3_DIR=~/.config/i3
-
 WORKSPACENAME=$1
 LAYOUT=$2
 
@@ -12,6 +11,7 @@ else
     i3-msg "append_layout $I3_DIR/layouts/$LAYOUT.json"
     for i in "${@:3}"
     do
-        $($i)&
+        eval $i &
     done
 fi
+

@@ -8,7 +8,7 @@
 # Undocumented feature which sets the size to "unlimited".
 export HISTFILESIZE=
 export HISTSIZE=
-export HISTTIMEFORMAT="[%F %T] "
+# export HISTTIMEFORMAT="[%F %T] "
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.

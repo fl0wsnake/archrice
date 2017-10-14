@@ -40,7 +40,7 @@ font-1 = unifont:fontformat=truetype:size=7:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10;2
 font-3 = FontAwesome:pixelsize=11;2
 modules-left = i3
-modules-right = downspeed wireless eth xkeyboard battery cpu memory volume date
+modules-right = downspeed wireless eth xkeyboard battery volume cpu memory date
 tray-position = right
 tray-padding = 1
 scroll-up = i3wm-wsnext
@@ -142,6 +142,13 @@ ramp-capacity-4 = 
 full-at = 100
 label-full = 100
 
+[module/volume]
+type = internal/volume
+format-volume = <label-volume>
+label-volume = %percentage%
+label-muted-foreground = ${colors.darkened-foreground}
+label-muted = 
+
 [module/cpu]
 type = internal/cpu
 format = <label><ramp-coreload>
@@ -162,13 +169,6 @@ type = internal/memory
 interval = 4
 format-prefix = ""
 label = %mb_used%
-
-[module/volume]
-type = internal/volume
-format-volume = <label-volume>
-label-volume = %percentage%
-label-muted-foreground = ${colors.darkened-foreground}
-label-muted = 
 
 [module/date]
 type = internal/date
