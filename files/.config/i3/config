@@ -1,12 +1,10 @@
-# There are the packages used in this i3 setup:
+# Here are the packages used in this i3 setup:
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset zsh
-# * some packages that might come in handy:
-# perl-anyevent-i3 xorg-xprop gcolor2 jq-git scrot cava
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3
 # * apps
-# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha
+# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava
 
 set $i3dir ~/.config/i3/
 set $term termite
