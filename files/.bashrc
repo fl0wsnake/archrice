@@ -25,7 +25,6 @@ alias diff='diff --color=auto'
 alias ls='ls --color=auto'
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
-alias watchpdf="xclip -selection c -o"
 
 
 # prompt colors

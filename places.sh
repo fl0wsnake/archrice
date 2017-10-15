@@ -10,6 +10,7 @@ declare -a places=(
 ".config/cava"
 ".config/scripts"
 ".config/gtk-3.0"
+".config/mps-youtube"
 
 ".config/.Xresources"
 ".config/compton.conf"
@@ -17,6 +18,7 @@ declare -a places=(
 ".config/wall.png"
 
 ".bashrc"
+".zshrc"
 ".bash_profile"
 ".xprofile"
 ".latexmkrc"

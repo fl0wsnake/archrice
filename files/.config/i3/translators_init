@@ -1,0 +1,13 @@
+#!/bin/bash
+
+I3_DIR=~/.config/i3
+WORKSPACENAME=$1
+LAYOUT=$2
+TERMINAL=$3
+
+translate_shell="$TERMINAL -e tran"
+artha="artha"
+google_translate="chromium --app=https://translate.google.com/#en/ru"
+
+$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$google_translate" "$artha" "$translate_shell"
+

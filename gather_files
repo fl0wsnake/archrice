@@ -6,7 +6,10 @@ mkdir -p $backupdir/.config
 
 for i in "${places[@]}"
 do
-    # echo ~/$i
-    # echo $(realpath $backupdir/$(dirname $i))
     cp -r ~/$i $(realpath $backupdir/$i)
 done
+
+find . -type f -name '*history*' -exec rm {} +
+find . -type f -name '*bookmark*' -exec rm {} +
+find . -type f -name '*tagged*' -exec rm {} +
+find . -type f -name '*cache*' -exec rm {} +

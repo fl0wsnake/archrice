@@ -1,4 +1,4 @@
-
+# There are the packages used in this i3 setup:
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
@@ -6,12 +6,12 @@
 # * some packages that might come in handy:
 # perl-anyevent-i3 xorg-xprop gcolor2 jq-git scrot cava
 # * apps
-# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell
+# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha
 
 set $i3dir ~/.config/i3/
 set $term termite
 # system mode
-set $mode_system (c)reload, (C)restart, Lock, Shutdown, Reboot, (e)logout, (S)suspend, Hibernate
+set $mode_system Process manager, (c)reload, (C)restart, Lock, Exit, Shutdown, Reboot, (e)logout, (S)suspend, Hibernate
 mode "$mode_system" {
     bindsym p exec --no-startup-id $term -e htop, mode "default"
     bindsym c reload
@@ -22,7 +22,6 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id i3lock-fancy && systemctl hibernate, mode "default"
     bindsym r [class=".*"] kill, exec systemctl reboot, mode "default"
     bindsym s [class=".*"] kill, exec systemctl poweroff, mode "default"
-
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -72,8 +71,8 @@ bindsym $mod+comma split v
 # enter fullscreen for the focused container
 bindsym $mod+f fullscreen toggle
 # toggle touchpad
-bindsym $mod+Shift+t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
-# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
+# change container layout
 bindsym $mod+b layout stacking
 bindsym $mod+n layout tabbed
 bindsym $mod+m layout toggle split
@@ -82,32 +81,36 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 # not sure if I need these
-bindsym $mod+t focus parent
-bindsym $mod+g focus child
+# bindsym $mod+t focus parent
+# bindsym $mod+g focus child
 # workspace declarations
-set $todos_workspace 50:
-set $music_workspace 51:
-set $browser_workspace 52:
-set $chat_workspace 53:
-set $stuff_workspace 54:
+set $todos_workspace 100:
+set $translator_workspace 101:
+set $browser_workspace 102:
+set $chat_workspace 103:
+set $music_workspace 104:
+set $video_workspace 105:
+set $stuff_workspace 106:
 # numerical
-set $first_workspace 101:1
-set $second_workspace 102:2
-set $third_workspace 103:3
-set $fourth_workspace 104:4
-set $fifth_workspace 105:5
-set $sixth_workspace 106:6
-set $seventh_workspace 107:7
-set $eighth_workspace 108:8
-set $ninth_workspace 109:9
-set $tenth_workspace 110:10
+set $first_workspace 201:1
+set $second_workspace 202:2
+set $third_workspace 203:3
+set $fourth_workspace 204:4
+set $fifth_workspace 205:5
+set $sixth_workspace 206:6
+set $seventh_workspace 207:7
+set $eighth_workspace 208:8
+set $ninth_workspace 209:9
+set $tenth_workspace 210:10
 # switch to workspace
 bindsym $mod+a exec --no-startup-id $i3dir/init_layout $todos_workspace todos emacs
 bindsym $mod+w exec --no-startup-id $i3dir/init_layout $browser_workspace browser chromium
 bindsym $mod+c exec --no-startup-id $i3dir/init_layout $chat_workspace chats telegram-desktop
 bindsym $mod+r exec --no-startup-id $i3dir/music_init $music_workspace music $term
+bindsym $mod+z exec --no-startup-id $i3dir/translators_init $translator_workspace translators $term
+bindsym $mod+v workspace $video_workspace
 bindsym $mod+s workspace $stuff_workspace, layout tabbed
-# numerical
+# numeric
 bindsym $mod+1 workspace $first_workspace
 bindsym $mod+2 workspace $second_workspace
 bindsym $mod+3 workspace $third_workspace
@@ -118,18 +121,14 @@ bindsym $mod+7 workspace $seventh_workspace
 bindsym $mod+8 workspace $eighth_workspace
 bindsym $mod+9 workspace $ninth_workspace
 bindsym $mod+0 workspace $tenth_workspace
-# cycle workspaces
-bindsym Mod1+Tab workspace next
-bindsym Mod1+Shift+Tab workspace prev
-# workspace back and forth
-bindsym $mod+Tab workspace back_and_forth
-bindsym $mod+Shift+Tab move container to workspace back_and_forth
 # move focused container to workspace
 bindsym $mod+Shift+a move container to workspace $todos_workspace
 bindsym $mod+Shift+w move container to workspace $browser_workspace
 bindsym $mod+Shift+c move container to workspace $chat_workspace
 bindsym $mod+Shift+r move container to workspace $music_workspace
+bindsym $mod+Shift+z move container to workspace $translator_workspace
 bindsym $mod+Shift+s move container to workspace $stuff_workspace
+bindsym $mod+Shift+v move container to workspace $video_workspace
 # numeric
 bindsym $mod+Shift+1 move container to workspace $first_workspace
 bindsym $mod+Shift+2 move container to workspace $second_workspace
@@ -141,6 +140,12 @@ bindsym $mod+Shift+7 move container to workspace $seventh_workspac
 bindsym $mod+Shift+8 move container to workspace $eighth_workspace
 bindsym $mod+Shift+9 move container to workspace $ninth_workspace
 bindsym $mod+Shift+0 move container to workspace $tenth_workspace
+# cycle workspaces
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+# workspace back and forth
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+Tab move container to workspace back_and_forth
 # workspace app assignments
 assign [class="discord"] $chat_workspace
 assign [class="Telegram"] $chat_workspace

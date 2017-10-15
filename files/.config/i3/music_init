@@ -8,7 +8,6 @@ TERMINAL=$3
 cava="$TERMINAL -e cava"
 pandora="sleep 0.4 && $TERMINAL -e pianobar"
 # player="chromium --app=https://play.google.com/music/listen#/ap/auto-playlist-thumbs-up"
-# player="sleep 0.6 && spotify"
 player="sleep 0.4 && spotify"
 focus="sleep 1.6 && i3-msg focus right"
 
