@@ -13,17 +13,9 @@ if type $executable > /dev/null; then
     fi
 
     while read input; do
-        # $command "$input" | nvim -
         filepath=$dir/$(echo $input | tr ' ' _).txt
-        # if [ ! -f $filepath ]; then
-        #     eval "$command $input" > $filepath
-        # fi
-        output=$(eval "$command $input")
-        if [[ ! -z $output ]]
-        then
-            echo $output > $filepath
-            $EDITOR $filepath
-        fi
+        eval "$command $input" > $filepath
+        $EDITOR $filepath
     done
 fi
 
