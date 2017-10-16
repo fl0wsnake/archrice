@@ -1,6 +1,0 @@
-#!/bin/bash
-
-while read input; do
-    trans -no-ansi $input | nvim -
-done
-

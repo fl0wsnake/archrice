@@ -43,8 +43,8 @@ modules-left = i3
 modules-right = downspeed wireless eth xkeyboard battery volume cpu memory date
 tray-position = right
 tray-padding = 1
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+; scroll-up = i3wm-wsnext
+; scroll-down = i3wm-wsprev
 underline-size = 2
 
 [module/bspwm]

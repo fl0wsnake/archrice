@@ -1,0 +1,12 @@
+#!/bin/bash
+
+command="$*"
+if [[ "$command" =~ ^trans.* ]]
+then
+    command="$command -no-ansi"
+fi
+
+while read input; do
+    $command "$input" | nvim -
+done
+

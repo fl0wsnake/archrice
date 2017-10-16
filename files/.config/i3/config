@@ -2,9 +2,10 @@
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell
 # * apps
-# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava
+# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava clyrics
+# * ~/.config/scripts must be in $PATH
 
 set $i3dir ~/.config/i3/
 set $term termite
@@ -30,6 +31,9 @@ workspace_layout default
 set $mod Mod4
 # font
 font pango:DejaVu Sans Mono 8
+# no mouse scroll action
+bindsym button4 nop
+bindsym button5 nop
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # terminal, explrer and editor shortcuts
@@ -106,8 +110,9 @@ bindsym $mod+w exec --no-startup-id $i3dir/init_layout $browser_workspace browse
 bindsym $mod+c exec --no-startup-id $i3dir/init_layout $chat_workspace chats telegram-desktop
 bindsym $mod+r exec --no-startup-id $i3dir/music_init $music_workspace music $term
 bindsym $mod+z exec --no-startup-id $i3dir/translators_init $translator_workspace translators $term
-bindsym $mod+v workspace $video_workspace
+bindsym $mod+v workspace $video_workspace, layout tabbed
 bindsym $mod+s workspace $stuff_workspace, layout tabbed
+bindsym $mod+Shift+d exec --no-startup-id $term -e "repl trans -no-ansi"
 # numeric
 bindsym $mod+1 workspace $first_workspace
 bindsym $mod+2 workspace $second_workspace
@@ -168,11 +173,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 # sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
-# media player controls
-bindsym XF86AudioPlay exec --no-startup-id playerctl play
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 # borders
 hide_edge_borders smart
 new_window pixel 1

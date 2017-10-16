@@ -7,6 +7,9 @@
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="af-magic"
 
+# no immediately shared history
+unsetopt INC_APPEND_HISTORY
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -80,3 +83,4 @@ source $ZSH/oh-my-zsh.sh
 
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
+alias trans="trans -no-ansi"
