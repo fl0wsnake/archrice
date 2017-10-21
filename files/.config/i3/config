@@ -2,7 +2,7 @@
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh
 # * apps
 # neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava clyrics
 # * ~/.config/scripts must be in $PATH
@@ -90,7 +90,7 @@ set $todos_workspace 100:
 set $translator_workspace 101:
 set $browser_workspace 102:
 set $chat_workspace 103:
-set $music_workspace 104:
+set $music_workspace 104:♫
 set $video_workspace 105:
 set $stuff_workspace 106:
 # numerical
@@ -159,10 +159,10 @@ bindsym $mod+u resize grow height 10 px or 10 ppt
 bindsym $mod+i resize shrink height 10 px or 10 ppt
 bindsym $mod+o resize grow width 10 px or 10 ppt
 # keyboard layout (input languages)
-exec --no-startup-id setxkbmap -layout us,ru,uk
-bindsym $mod+Control+1 exec --no-startup-id setxkbmap us
-bindsym $mod+Control+2 exec --no-startup-id setxkbmap ru
-bindsym $mod+Control+3 exec --no-startup-id setxkbmap ua
+exec --no-startup-id xmodmap ~/.config/keymap
+exec --no-startup-id setxkbmap -option grp:switch,grp:caps_toggle,grp_led:caps us,ru
+bindsym $mod+Control+1 exec --no-startup-id "setxkbmap us,ru"
+bindsym $mod+Control+2 exec --no-startup-id "setxkbmap us,ua"
 # screenshots
 bindsym Print exec --no-startup-id scrot ~/images/screenshots/%Y-%m-%d-%T-screenshot.png
 # laptp fn key bindings
@@ -193,7 +193,7 @@ exec_always --no-startup-id xrdb ~/.config/.Xresources && ~/.config/polybar/laun
 # no beep
 exec_always --no-startup-id xset -b
 exec --no-startup-id nm-applet
-exec --no-startup-id xmodmap ~/.config/keymap
+# exec_always --no-startup-id xmodmap ~/.config/keymap
 exec --no-startup-id $i3dir/touchpad_disable
 exec --no-startup-id feh --bg-scale ~/.config/wall.png
 exec --no-startup-id unclutter --timeout 1
