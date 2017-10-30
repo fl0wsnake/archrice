@@ -49,8 +49,8 @@ rofi.color-normal:	#111, #819396, #222, #006699, #ffffff
 rofi.color-active:	#002b37, #008ed4, #003643, #008ed4, #66c6ff
 
 rofi.fake-transparency:	true
-rofi.lines:		20
-rofi.bw:		2
+rofi.lines:		8
+rofi.bw:		-3
 rofi.opacity:		"10"
 rofi.hide-scrollbar:	true
 rofi.width:		50

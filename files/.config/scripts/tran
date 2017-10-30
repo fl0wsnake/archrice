@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo $* | nvim - -c 'exe Trans(0)'

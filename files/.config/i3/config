@@ -2,13 +2,23 @@
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc qutebrowser
 # * apps
 # neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava clyrics
 # * ~/.config/scripts must be in $PATH
 
 set $i3dir ~/.config/i3/
 set $term termite
+set $leader Mod4
+# default tab layout
+workspace_layout default
+# font
+font pango:DejaVu Sans Mono 8
+# no mouse scroll action
+bindsym button4 nop
+bindsym button5 nop
+# use Mouse+$leader to drag floating windows to their wanted position
+floating_modifier $leader
 # system mode
 set $mode_system Process manager, (c)reload, (C)restart, Lock, Exit, Shutdown, Reboot, (e)logout, (S)suspend, Hibernate
 mode "$mode_system" {
@@ -24,67 +34,56 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+p mode "$mode_system"
-# default tab layout
-workspace_layout default
-# mod key
-set $mod Mod4
-# font
-font pango:DejaVu Sans Mono 8
-# no mouse scroll action
-bindsym button4 nop
-bindsym button5 nop
-# use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-# terminal, explrer and editor shortcuts
-bindsym $mod+Return exec $term
-bindsym $mod+Shift+Return exec $term -d "$(xcwd)"
-bindsym $mod+e exec $term -e "${EDITOR:=$VISUAL}"
-bindsym $mod+Shift+e exec $term -d "$(xcwd)" -e "${EDITOR:=$VISUAL} ."
-bindsym $mod+x exec $term -e ranger
-bindsym $mod+Shift+x exec $term -d "$(xcwd)" -e "ranger ."
+bindsym $leader+p mode "$mode_system"
+# terminal, explorer and editor shortcuts
+bindsym $leader+Return exec $term
+bindsym $leader+Shift+Return exec $term -d "$(xcwd)"
+bindsym $leader+e exec $term -e "${EDITOR:=$VISUAL}"
+bindsym $leader+Shift+e exec $term -d "$(xcwd)" -e "${EDITOR:=$VISUAL} ."
+bindsym $leader+x exec $term -e ranger
+bindsym $leader+Shift+x exec $term -d "$(xcwd)" -e "ranger ."
 # kill focused window
-bindsym $mod+q kill
-bindsym $mod+Shift+q [class=".*"] kill
+bindsym $leader+q kill
+bindsym $leader+Shift+q [class=".*"] kill
 # program launcher
-bindsym $mod+d exec rofi -show run
+bindsym $leader+d exec rofi -show run
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $leader+h focus left
+bindsym $leader+j focus down
+bindsym $leader+k focus up
+bindsym $leader+l focus right
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $leader+Left focus left
+bindsym $leader+Down focus down
+bindsym $leader+Up focus up
+bindsym $leader+Right focus right
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $leader+Shift+h move left
+bindsym $leader+Shift+j move down
+bindsym $leader+Shift+k move up
+bindsym $leader+Shift+l move right
+bindsym $leader+Shift+Left move left
+bindsym $leader+Shift+Down move down
+bindsym $leader+Shift+Up move up
+bindsym $leader+Shift+Right move right
 # split method
-bindsym $mod+period split h
-bindsym $mod+comma split v
+bindsym $leader+period split h
+bindsym $leader+comma split v
 # enter fullscreen for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $leader+f fullscreen toggle
 # toggle touchpad
-bindsym $mod+t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
+bindsym $leader+t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
 # change container layout
-bindsym $mod+b layout stacking
-bindsym $mod+n layout tabbed
-bindsym $mod+m layout toggle split
+bindsym $leader+b layout stacking
+bindsym $leader+n layout tabbed
+bindsym $leader+m layout toggle split
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $leader+Shift+space floating toggle
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $leader+space focus mode_toggle
 # not sure if I need these
-# bindsym $mod+t focus parent
-# bindsym $mod+g focus child
+# bindsym $leader+t focus parent
+# bindsym $leader+g focus child
 # workspace declarations
 set $todos_workspace 100:
 set $translator_workspace 101:
@@ -105,64 +104,64 @@ set $eighth_workspace 208:8
 set $ninth_workspace 209:9
 set $tenth_workspace 210:10
 # switch to workspace
-bindsym $mod+a exec --no-startup-id $i3dir/init_layout $todos_workspace todos emacs
-bindsym $mod+w exec --no-startup-id $i3dir/init_layout $browser_workspace browser chromium
-bindsym $mod+c exec --no-startup-id $i3dir/init_layout $chat_workspace chats telegram-desktop
-bindsym $mod+r exec --no-startup-id $i3dir/music_init $music_workspace music $term
-bindsym $mod+z exec --no-startup-id $i3dir/translators_init $translator_workspace translators $term
-bindsym $mod+v workspace $video_workspace, layout tabbed
-bindsym $mod+s workspace $stuff_workspace, layout tabbed
-bindsym $mod+Shift+d exec --no-startup-id $term -e "repl trans -no-ansi"
+bindsym $leader+a exec --no-startup-id $i3dir/todos_init $todos_workspace todos $term
+bindsym $leader+w exec --no-startup-id $i3dir/init_layout $browser_workspace browser chromium
+bindsym $leader+c exec --no-startup-id $i3dir/init_layout $chat_workspace chats telegram-desktop
+bindsym $leader+r exec --no-startup-id $i3dir/music_init $music_workspace music $term
+bindsym $leader+z exec --no-startup-id $i3dir/translators_init $translator_workspace translators $term
+bindsym $leader+v workspace $video_workspace, layout tabbed
+bindsym $leader+s workspace $stuff_workspace, layout tabbed
+bindsym $leader+Shift+d exec --no-startup-id $term -e "repl trans -no-ansi"
 # numeric
-bindsym $mod+1 workspace $first_workspace
-bindsym $mod+2 workspace $second_workspace
-bindsym $mod+3 workspace $third_workspace
-bindsym $mod+4 workspace $fourth_workspace
-bindsym $mod+5 workspace $fifth_workspace
-bindsym $mod+6 workspace $sixth_workspace
-bindsym $mod+7 workspace $seventh_workspace
-bindsym $mod+8 workspace $eighth_workspace
-bindsym $mod+9 workspace $ninth_workspace
-bindsym $mod+0 workspace $tenth_workspace
+bindsym $leader+1 workspace $first_workspace
+bindsym $leader+2 workspace $second_workspace
+bindsym $leader+3 workspace $third_workspace
+bindsym $leader+4 workspace $fourth_workspace
+bindsym $leader+5 workspace $fifth_workspace
+bindsym $leader+6 workspace $sixth_workspace
+bindsym $leader+7 workspace $seventh_workspace
+bindsym $leader+8 workspace $eighth_workspace
+bindsym $leader+9 workspace $ninth_workspace
+bindsym $leader+0 workspace $tenth_workspace
 # move focused container to workspace
-bindsym $mod+Shift+a move container to workspace $todos_workspace
-bindsym $mod+Shift+w move container to workspace $browser_workspace
-bindsym $mod+Shift+c move container to workspace $chat_workspace
-bindsym $mod+Shift+r move container to workspace $music_workspace
-bindsym $mod+Shift+z move container to workspace $translator_workspace
-bindsym $mod+Shift+s move container to workspace $stuff_workspace
-bindsym $mod+Shift+v move container to workspace $video_workspace
+bindsym $leader+Shift+a move container to workspace $todos_workspace
+bindsym $leader+Shift+w move container to workspace $browser_workspace
+bindsym $leader+Shift+c move container to workspace $chat_workspace
+bindsym $leader+Shift+r move container to workspace $music_workspace
+bindsym $leader+Shift+z move container to workspace $translator_workspace
+bindsym $leader+Shift+s move container to workspace $stuff_workspace
+bindsym $leader+Shift+v move container to workspace $video_workspace
 # numeric
-bindsym $mod+Shift+1 move container to workspace $first_workspace
-bindsym $mod+Shift+2 move container to workspace $second_workspace
-bindsym $mod+Shift+3 move container to workspace $third_workspace
-bindsym $mod+Shift+4 move container to workspace $fourth_workspace
-bindsym $mod+Shift+5 move container to workspace $fifth_workspace
-bindsym $mod+Shift+6 move container to workspace $sixth_workspace
-bindsym $mod+Shift+7 move container to workspace $seventh_workspac
-bindsym $mod+Shift+8 move container to workspace $eighth_workspace
-bindsym $mod+Shift+9 move container to workspace $ninth_workspace
-bindsym $mod+Shift+0 move container to workspace $tenth_workspace
+bindsym $leader+Shift+1 move container to workspace $first_workspace
+bindsym $leader+Shift+2 move container to workspace $second_workspace
+bindsym $leader+Shift+3 move container to workspace $third_workspace
+bindsym $leader+Shift+4 move container to workspace $fourth_workspace
+bindsym $leader+Shift+5 move container to workspace $fifth_workspace
+bindsym $leader+Shift+6 move container to workspace $sixth_workspace
+bindsym $leader+Shift+7 move container to workspace $seventh_workspac
+bindsym $leader+Shift+8 move container to workspace $eighth_workspace
+bindsym $leader+Shift+9 move container to workspace $ninth_workspace
+bindsym $leader+Shift+0 move container to workspace $tenth_workspace
 # cycle workspaces
-bindsym Mod1+Tab workspace next
+# bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 # workspace back and forth
-bindsym $mod+Tab workspace back_and_forth
-bindsym $mod+Shift+Tab move container to workspace back_and_forth
+bindsym $leader+Tab workspace back_and_forth
+bindsym $leader+Shift+Tab move container to workspace back_and_forth
 # workspace app assignments
 assign [class="discord"] $chat_workspace
 assign [class="Telegram"] $chat_workspace
 assign [class="Skype"] $chat_workspace
 # resize
-bindsym $mod+y resize shrink width 10 px or 10 ppt
-bindsym $mod+u resize grow height 10 px or 10 ppt
-bindsym $mod+i resize shrink height 10 px or 10 ppt
-bindsym $mod+o resize grow width 10 px or 10 ppt
+bindsym $leader+y resize shrink width 10 px or 10 ppt
+bindsym $leader+u resize grow height 10 px or 10 ppt
+bindsym $leader+i resize shrink height 10 px or 10 ppt
+bindsym $leader+o resize grow width 10 px or 10 ppt
 # keyboard layout (input languages)
 exec --no-startup-id xmodmap ~/.config/keymap
 exec --no-startup-id setxkbmap -option grp:switch,grp:caps_toggle,grp_led:caps us,ru
-bindsym $mod+Control+1 exec --no-startup-id "setxkbmap us,ru"
-bindsym $mod+Control+2 exec --no-startup-id "setxkbmap us,ua"
+bindsym $leader+Control+1 exec --no-startup-id "setxkbmap us,ru"
+bindsym $leader+Control+2 exec --no-startup-id "setxkbmap us,ua"
 # screenshots
 bindsym Print exec --no-startup-id scrot ~/images/screenshots/%Y-%m-%d-%T-screenshot.png
 # laptp fn key bindings

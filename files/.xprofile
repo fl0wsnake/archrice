@@ -11,6 +11,6 @@ path_addition+=~/.config/scripts
 path_addition+=":"
 export PATH=$path_addition$PATH
 
-export BROWSER=/usr/bin/chromium
+export BROWSER=/usr/bin/qutebrowser
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim

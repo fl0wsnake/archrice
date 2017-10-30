@@ -2,7 +2,7 @@
 
 backupdir=./files
 
-declare -a places=(
+declare -a paths=(
 ".config/i3"
 ".config/polybar"
 ".config/ranger"
@@ -11,7 +11,9 @@ declare -a places=(
 ".config/scripts"
 ".config/gtk-3.0"
 ".config/mps-youtube"
+".config/qutebrowser"
 
+".config/xylosper/bomi/pref.json"
 ".config/.Xresources"
 ".config/compton.conf"
 ".config/keymap"
@@ -23,3 +25,4 @@ declare -a places=(
 ".xprofile"
 ".latexmkrc"
 )
+

@@ -1,15 +1,16 @@
 #!/bin/bash
 
-source ./places.sh
+source ./paths.sh
 rm -rf $backupdir
-mkdir -p $backupdir/.config
 
-for i in "${places[@]}"
+for i in "${paths[@]}"
 do
-    cp -r ~/$i $(realpath $backupdir/$i)
+    dir=$(dirname $i)
+    mkdir -p $backupdir/$dir
+    cp -r ~/$i $backupdir/$dir
 done
 
-find . -type f -name '*history*' -exec rm {} +
-find . -type f -name '*bookmark*' -exec rm {} +
-find . -type f -name '*tagged*' -exec rm {} +
-find . -type f -name '*cache*' -exec rm {} +
+find ./files -type f -name '*history*' -exec rm {} +
+find ./files -type f -name '*bookmark*' -exec rm {} +
+find ./files -type f -name '*tagged*' -exec rm {} +
+find ./files -type f -name '*cache*' -exec rm {} +

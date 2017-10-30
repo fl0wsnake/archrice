@@ -1,0 +1,10 @@
+#!/bin/bash
+
+I3_DIR=~/.config/i3
+WORKSPACENAME=$1
+LAYOUT=$2
+TERMINAL=$3
+
+todos="termite -e \"nvim -c VimwikiIndex\""
+
+$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$todos"

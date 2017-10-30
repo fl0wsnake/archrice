@@ -84,3 +84,5 @@ source $ZSH/oh-my-zsh.sh
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias trans="trans -no-ansi"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
