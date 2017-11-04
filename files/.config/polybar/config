@@ -6,7 +6,8 @@
 [colors]
 focused-foreground = #ffffff
 focused-background = #3f3f3f
-focused-underline = #fba922
+; focused-underline = #fba922
+focused-underline = #FF881E
 darkened-foreground = #404040
 orange = #ca6500
 pale-orange = #DE781e
@@ -22,7 +23,7 @@ col = #00f
 [bar/example]
 monitor = ${env:MONITOR:eDP}
 width = 100%
-height = 16
+height = 15
 bottom = true
 fixed-center = false
 background = ${colors.background}
@@ -35,10 +36,10 @@ padding-left = 0
 padding-right = 0
 module-margin-left = 0
 module-margin-right = 1
-font-0 = mono:pixelsize=10;2
-font-1 = unifont:fontformat=truetype:size=7:antialias=false;0
-font-2 = Wuncon Siji:pixelsize=10;2
-font-3 = FontAwesome:pixelsize=11;2
+
+font-0 = Monaco:pixelsize=11;3
+font-1 = FontAwesome:pixelsize=11;2
+
 modules-left = i3
 modules-right = downspeed xkeyboard battery volume cpu memory date
 tray-position = right
@@ -101,7 +102,7 @@ label-connected = %downspeed%
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
-format-prefix = ""
+format-prefix = %{F#9f54ff}%{F-}
 label-layout = %layout%
 label-indicator-padding = 0
 label-indicator-margin = 0
@@ -115,20 +116,20 @@ format-charging = <ramp-capacity><label-charging>
 format-discharging = <ramp-capacity><label-discharging>
 label-charging = %percentage%
 label-discharging = %percentage%
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+ramp-capacity-0 = %{F#28a3ff}%{F-}
+ramp-capacity-1 = %{F#28a3ff}%{F-}
+ramp-capacity-2 = %{F#28a3ff}%{F-}
+ramp-capacity-3 = %{F#28a3ff}%{F-}
+ramp-capacity-4 = %{F#28a3ff}%{F-}
 full-at = 100
-label-full = 100
+label-full = %{F#28a3ff}%{F-}100
 
 [module/volume]
 type = internal/volume
 format-volume = <label-volume>
-label-volume = %percentage%
+label-volume = %{F#2bb52b}%{F-}%percentage%
 label-muted-foreground = ${colors.darkened-foreground}
-label-muted = 
+label-muted = %{F#005400}%{F-}
 
 [module/cpu]
 type = internal/cpu
@@ -143,12 +144,12 @@ ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
 interval = 2
-format-prefix = ""
+format-prefix = %{F#ff771e}%{F-}
 
 [module/memory]
 type = internal/memory
 interval = 4
-format-prefix = ""
+format-prefix = %{F#db2828}%{F-}
 label = %mb_used%
 
 [module/date]
@@ -156,7 +157,7 @@ type = internal/date
 interval = 8
 date = "%a, %b %d, %Y"
 time = "%I:%M%p"
-format-prefix = 
+format-prefix = %{F#e03997}%{F-}
 label = %date% %time%
 
 ; [module/wireless]

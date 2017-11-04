@@ -2,7 +2,7 @@
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc qutebrowser atools
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc qutebrowser atools inotify-tools
 # * apps
 # neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava clyrics
 # * ~/.config/scripts must be in $PATH
@@ -13,10 +13,12 @@ set $leader Mod4
 # default tab layout
 workspace_layout default
 # font
-font pango:DejaVu Sans Mono 8
+# font pango:DejaVu Sans Mono 8
+font Open Sans Light 14
 # no mouse scroll action
 bindsym button4 nop
 bindsym button5 nop
+focus_follows_mouse no
 # use Mouse+$leader to drag floating windows to their wanted position
 floating_modifier $leader
 # system mode
@@ -39,8 +41,8 @@ bindsym $leader+p mode "$mode_system"
 # terminal, explorer and editor shortcuts
 bindsym $leader+Return exec $term
 bindsym $leader+Shift+Return exec $term -d "$(xcwd)"
-bindsym $leader+v exec $term -e "${EDITOR:=$VISUAL}"
-bindsym $leader+Shift+v exec $term -d "$(xcwd)" -e "${EDITOR:=$VISUAL} ."
+bindsym $leader+z exec $term -e "${EDITOR:=$VISUAL}"
+bindsym $leader+Shift+z exec $term -d "$(xcwd)" -e "${EDITOR:=$VISUAL} ."
 bindsym $leader+x exec $term -d "$(xcwd)" -e "ranger ."
 # kill focused window
 bindsym $leader+d kill
@@ -83,19 +85,19 @@ bindsym $leader+space focus mode_toggle
 # bindsym $leader+t focus parent
 # bindsym $leader+g focus child
 # alphabetic workspaces
-set $q_workspace 151:q
+set $q_workspace 151:Q
 bindsym $leader+q workspace $q_workspace
 bindsym $leader+Shift+q move container to workspace $q_workspace
-set $w_workspace 152:w
+set $w_workspace 152:W
 bindsym $leader+w workspace $w_workspace
 bindsym $leader+Shift+w move container to workspace $w_workspace
-set $e_workspace 153:e
+set $e_workspace 153:E
 bindsym $leader+e workspace $e_workspace
 bindsym $leader+Shift+e move container to workspace $e_workspace
-set $r_workspace 154:r
+set $r_workspace 154:R
 bindsym $leader+r workspace $r_workspace
 bindsym $leader+Shift+r move container to workspace $r_workspace
-set $t_workspace 155:t
+set $t_workspace 155:T
 bindsym $leader+t workspace $t_workspace
 bindsym $leader+Shift+t move container to workspace $t_workspace
 set $todos_workspace 100:
@@ -111,8 +113,8 @@ set $music_workspace 104:♫
 bindsym $leader+g exec --no-startup-id $i3dir/music_init $music_workspace music $term
 bindsym $leader+Shift+g move container to workspace $music_workspace
 set $translator_workspace 101:
-bindsym $leader+z exec --no-startup-id $i3dir/translators_init $translator_workspace translators $term
-bindsym $leader+Shift+z move container to workspace $translator_workspace
+bindsym $leader+v exec --no-startup-id $i3dir/translators_init $translator_workspace translators $term
+bindsym $leader+Shift+v move container to workspace $translator_workspace
 # numeric workspaces
 set $1_workspace 201:1
 bindsym $leader+1 workspace $1_workspace
@@ -165,7 +167,7 @@ exec --no-startup-id setxkbmap -option grp:switch,grp:caps_toggle,grp_led:caps u
 bindsym $leader+Control+1 exec --no-startup-id "setxkbmap us,ru"
 bindsym $leader+Control+2 exec --no-startup-id "setxkbmap us,ua"
 # screenshots
-bindsym Print exec --no-startup-id scrot ~/images/screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym Print exec --no-startup-id scrot ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
 # laptp fn key bindings
 # pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%

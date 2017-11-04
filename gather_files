@@ -11,6 +11,9 @@ do
 done
 
 find ./files -type f -name '*history*' -exec rm {} +
-find ./files -type f -name '*bookmark*' -exec rm {} +
 find ./files -type f -name '*tagged*' -exec rm {} +
 find ./files -type f -name '*cache*' -exec rm {} +
+
+# no always changing line of recent jump code
+ranger_bookmarks=./files/.config/ranger/bookmarks
+tail -n +2 "$ranger_bookmarks" > "$ranger_bookmarks.tmp" && mv "$ranger_bookmarks.tmp" "$ranger_bookmarks"

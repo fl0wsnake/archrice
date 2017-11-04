@@ -28,6 +28,8 @@
 !! white
 *color7: #a8a19f
 *color15: #f1efee
+!! orange
+*color16: #d97d19
 
 URxvt.intensityStyles:	false
 !!URxvt.background:       [70]#000000
@@ -41,16 +43,25 @@ URxvt.url-launcher:	/usr/bin/xdg-open
 URxvt.matcher.button:	1
 URxvt.resize-font.smaller:	C-Down
 URxvt.resize-font.bigger:	C-Up
-
 URxvt.colorUL:		#4682B4
-rofi.color-enabled:	true
-rofi.color-window:	#000, #000, #000
-rofi.color-normal:	#111, #819396, #222, #006699, #ffffff
-rofi.color-active:	#002b37, #008ed4, #003643, #008ed4, #66c6ff
+
+rofi.color-window: argb:d0000000, #373B47
+rofi.color-normal: argb:00373B47, #d97d19, argb:00373B47, argb:20d97d19, #FFAC52
+rofi.color-urgent: argb:00373B47, #FFAC52, argb:90000000, argb:20d97d19, #FFAC52
+rofi.color-active: argb:00373B47, #FFAC52, argb:90000000, argb:20d97d19, #FFAC52
 
 rofi.fake-transparency:	true
-rofi.lines:		8
-rofi.bw:		-3
-rofi.opacity:		"10"
-rofi.hide-scrollbar:	true
-rofi.width:		50
+
+rofi.font: Open Sans Light 14
+rofi.width: 48
+rofi.lines: 12
+rofi.padding: 2
+
+rofi.bw: 0
+rofi.eh: 1
+/* rofi.sidebar-mode: true */
+/* rofi.location: 8 */
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+rofi.show-icons: true
+rofi.modi: window,run,drun
