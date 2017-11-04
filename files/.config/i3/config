@@ -2,7 +2,7 @@
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc qutebrowser
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc qutebrowser atools
 # * apps
 # neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava clyrics
 # * ~/.config/scripts must be in $PATH
@@ -71,6 +71,7 @@ bindsym $leader+period split h
 bindsym $leader+comma split v
 # enter fullscreen for the focused container
 bindsym $leader+f fullscreen toggle
+bindsym $leader+Shift+f fullscreen toggle global
 # toggle touchpad
 bindsym $leader+t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
 # change container layout
@@ -138,7 +139,7 @@ bindsym $leader+Shift+3 move container to workspace $third_workspace
 bindsym $leader+Shift+4 move container to workspace $fourth_workspace
 bindsym $leader+Shift+5 move container to workspace $fifth_workspace
 bindsym $leader+Shift+6 move container to workspace $sixth_workspace
-bindsym $leader+Shift+7 move container to workspace $seventh_workspac
+bindsym $leader+Shift+7 move container to workspace $seventh_workspace
 bindsym $leader+Shift+8 move container to workspace $eighth_workspace
 bindsym $leader+Shift+9 move container to workspace $ninth_workspace
 bindsym $leader+Shift+0 move container to workspace $tenth_workspace
