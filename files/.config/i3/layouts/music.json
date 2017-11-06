@@ -69,7 +69,7 @@
                             // tabbed split container with 2 children
                             "border": "pixel",
                             "floating": "auto_off",
-                            "layout": "tabbed",
+                            "layout": "stacked",
                             "percent": 1,
                             "type": "con",
                             "nodes": [{
