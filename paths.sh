@@ -13,6 +13,7 @@ declare -a paths=(
 ".config/mps-youtube"
 ".config/qutebrowser"
 
+".config/vis/config"
 ".config/xylosper/bomi/pref.json"
 ".config/.Xresources"
 ".config/compton.conf"

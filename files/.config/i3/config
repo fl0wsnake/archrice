@@ -2,9 +2,9 @@
 # * interface:
 # ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc atools inotify-tools
+# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc atools inotify-tools peek-git
 # * apps
-# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cava clyrics qutebrowser cmus
+# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cli-visualizer clyrics qutebrowser cmus
 # * ~/.config/scripts must be in $PATH
 
 set $i3dir ~/.config/i3/
@@ -30,8 +30,8 @@ mode "$mode_system" {
     bindsym Shift+c restart
     bindsym l exec --no-startup-id i3lock-fancy, mode "default"
     bindsym e [class=".*"] kill, exit, mode "default"
-    bindsym Shift+s exec --no-startup-id i3lock-fancy && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id i3lock-fancy && systemctl hibernate, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r [class=".*"] kill, exec systemctl reboot, mode "default"
     bindsym s [class=".*"] kill, exec systemctl poweroff, mode "default"
     bindsym Return mode "default"
@@ -49,6 +49,8 @@ bindsym $leader+d kill
 bindsym $leader+Shift+d [class=".*"] kill
 # program launcher
 bindsym $leader+Shift+x exec rofi -show run
+# window finder
+bindsym $leader+Shift+o exec rofi -show window
 # change focus
 bindsym $leader+h focus left
 bindsym $leader+j focus down

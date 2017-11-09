@@ -5,12 +5,12 @@ WORKSPACENAME=$1
 LAYOUT=$2
 TERMINAL=$3
 
-cava="$TERMINAL -e cava"
+visualizer="$TERMINAL -e vis"
 lyrics="sleep 0.4 && $TERMINAL -e nvim"
 pandora="sleep 0.8 && $TERMINAL -e pianobar"
 # player="chromium --app=https://play.google.com/music/listen#/ap/auto-playlist-thumbs-up"
 # player="sleep 0.8 && spotify"
 # focus="sleep 1.6 && i3-msg focus right"
 
-$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$player" "$cava" "$pandora" "$lyrics" "$focus"
+$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$player" "$visualizer" "$pandora" "$lyrics" "$focus"
 
