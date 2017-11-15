@@ -199,7 +199,7 @@ exec_always --no-startup-id xrdb ~/.config/.Xresources && ~/.config/polybar/laun
 exec_always --no-startup-id xset -b
 exec --no-startup-id nm-applet
 exec --no-startup-id $i3dir/touchpad_disable
-exec --no-startup-id feh --bg-scale ~/.config/wall.png
+exec --no-startup-id wallp
 exec --no-startup-id unclutter --timeout 1
 exec --no-startup-id compton
 exec --no-startup-id udiskie

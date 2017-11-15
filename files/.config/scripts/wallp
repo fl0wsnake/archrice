@@ -1,0 +1,12 @@
+#!/bin/bash
+
+wall_filename=~/.config/wall
+wall_path=$(find ~/.config -maxdepth 1 -type f -name 'wall.*')
+if [[ !$# -eq 0 ]]; then
+    rm -f $wall_path
+    new_wall_path="$1"
+    new_wall_ext="${1##*.}"
+    wall_path="$wall_filename.$new_wall_ext"
+    cp "$new_wall_path" "$wall_path"
+fi
+feh --bg-scale "$wall_path"

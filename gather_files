@@ -14,6 +14,6 @@ find ./files -type f -name '*history*' -exec rm {} +
 find ./files -type f -name '*tagged*' -exec rm {} +
 find ./files -type f -name '*cache*' -exec rm {} +
 
-# no always changing line of recent jump code
+# no ` and 0-9 bookmarks synced
 ranger_bookmarks=./files/.config/ranger/bookmarks
-tail -n +2 "$ranger_bookmarks" > "$ranger_bookmarks.tmp" && mv "$ranger_bookmarks.tmp" "$ranger_bookmarks"
+grep '^[^0-9]' <"$ranger_bookmarks" | tail - -n +2> "$ranger_bookmarks.tmp" && mv "$ranger_bookmarks.tmp" "$ranger_bookmarks"

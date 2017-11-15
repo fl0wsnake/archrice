@@ -18,7 +18,7 @@ declare -a paths=(
 ".config/.Xresources"
 ".config/compton.conf"
 ".config/keymap"
-".config/wall.png"
+".config/wall.*"
 
 ".bashrc"
 ".zshrc"
