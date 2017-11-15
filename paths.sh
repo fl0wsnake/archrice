@@ -25,5 +25,10 @@ declare -a paths=(
 ".bash_profile"
 ".xprofile"
 ".latexmkrc"
+
+".config/nvim/autoload"
+".config/nvim/UltiSnips"
+".config/nvim/init.vim"
+".config/nvim/ginit.vim"
 )
 
