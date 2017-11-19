@@ -65,6 +65,7 @@ call plug#end()
 let mapleader="\<Space>"
 let maplocalleader=","
 " sets
+set timeoutlen=1500
 set linebreak
 set noswapfile
 set ignorecase
@@ -256,7 +257,24 @@ nnoremap <silent> <leader>tc :call ToggleVar(&spell, 'spellchecker')<cr>:setl sp
 let stripTrailingWhitespacesMode = 1
 nnoremap <silent> <leader>tw :let stripTrailingWhitespacesMode=ToggleVar(stripTrailingWhitespacesMode, 'strip trailing whitespaces')<cr>
 au BufWritePre * silent! exe stripTrailingWhitespacesMode?'%s/\s\+$//e':''
-" au BufWritePre * :%s/\s\+$//e
+" show interface mode
+let showInterfaceMode = 1
+function! ToggleInterface(if_show)
+    if a:if_show == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+nnoremap <silent> <leader>ti :let showInterfaceMode=ToggleVar(showInterfaceMode, 'show interface')<cr>:call ToggleInterface(g:showInterfaceMode)<cr>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
