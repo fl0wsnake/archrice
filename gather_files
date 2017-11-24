@@ -10,9 +10,9 @@ do
     cp -r ~/$i $backupdir/$dir
 done
 
-find ./files -type f -name '*history*' -exec rm {} +
-find ./files -type f -name '*tagged*' -exec rm {} +
-find ./files -type f -name '*cache*' -exec rm {} +
+find ./files \( -type f -o -type d \) -name '*history*' -exec rm -rf {} +
+find ./files \( -type f -o -type d \) -name '*tagged*' -exec rm -rf {} +
+find ./files \( -type f -o -type d \) -name '*cache*' -exec rm -rf {} +
 
 # no ` and 0-9 bookmarks synced
 ranger_bookmarks=./files/.config/ranger/bookmarks

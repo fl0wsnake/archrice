@@ -168,8 +168,8 @@ label = %mb_used%
 [module/date]
 type = internal/date
 interval = 8
-date = "%a, %b %d, %Y"
-time = "%I:%M%p"
+date = "%a %d %b"
+time = "%H:%M"
 format-prefix = %{F#e03997}%{F-}
 label = %date% %time%
 

@@ -2,13 +2,15 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/kirill/.oh-my-zsh
+export ZSH=/home/kirill/.oh-my-zsh
 
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="af-magic"
 
 # no immediately shared history
 unsetopt INC_APPEND_HISTORY
+setopt noextendedhistory
+setopt nosharehistory
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -84,8 +86,10 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-alias setclip="xclip -selection c"
-alias getclip="xclip -selection c -o"
-alias trans="trans -no-ansi"
+alias setclip='xclip -selection c'
+alias getclip='xclip -selection c -o'
+alias trans='trans -no-ansi'
+alias bins='ls -t /usr/bin | head -n 16'
+alias watchtime='while true; do echo -ne "$(date +%H:%M:%S:%2N)\r"; done'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

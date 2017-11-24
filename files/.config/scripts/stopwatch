@@ -1,0 +1,13 @@
+#!/bin/bash
+ 
+begin=$(date +%s%2N)
+ 
+while true; do
+   now=$(date +%s%2N)
+   let diff=$(($now - $begin))
+   let mins=$(($diff / 6000))
+   let secs=$(($diff / 100 % 60))
+   let nanosecs=$(($diff % 100))
+ 
+   printf "\r%02d:%02d:%02d" $mins $secs $nanosecs
+done

@@ -51,8 +51,10 @@ Plug 'othree/xml.vim'
 Plug 'lervag/vimtex'
 Plug 'xuhdev/vim-latex-live-preview'
 " markdown
+" Plug 'godlygeek/tabular'
 Plug 'gabrielelana/vim-markdown'
 Plug 'suan/vim-instant-markdown'
+Plug 'dhruvasagar/vim-table-mode'
 " notes
 Plug 'vimwiki/vimwiki'
 " elixir
@@ -111,6 +113,7 @@ noremap <silent> <leader>fe :e!<cr>
 noremap <silent> <leader>fE :bufdo e!<cr>
 noremap <silent> <leader>fn :let @+ = expand('%')<cr>
 noremap <silent> <leader>fp :let @+ = expand('%:p')<cr>
+noremap <silent> <leader>fT :set filetype=
 noremap <silent> <leader>qq :qa<cr>
 noremap <silent> <leader>qQ :qa!<cr>
 noremap <silent> <leader>qw :wqa<cr>
@@ -131,6 +134,7 @@ function! DeleteFileAndBuffer()
 endfunction
 noremap <silent> <leader>fd :call delete(expand('%'))<cr>:set modified<cr>
 noremap <silent> <leader>bd :bd!<cr>
+noremap <silent> <leader>bD :silent! w \| %bd \| e#<cr>
 noremap <silent> <leader>fm :Rename<space>
 noremap <silent> <M-h> :bprevious<cr>
 noremap <silent> <M-l> :bnext<cr>
@@ -233,10 +237,14 @@ au VimEnter * if argc() == 0 | setl buftype=nofile | endif
 " modes
 function! ToggleVar(var, message)
     if a:var
-        echo a:message.'mode OFF'
+        if a:message != ''
+            echo a:message.'mode OFF'
+        endif
         return 0
     else
-        echo a:message.'mode ON'
+        if a:message != ''
+            echo a:message.'mode ON'
+        endif
         return 1
     endif
 endfunction
@@ -252,7 +260,11 @@ au CursorHold * exe hlUnderCursorMode?printf('match IncSearch /\V\<%s\>/', escap
 set spellcapcheck=
 set spelllang=en
 au FileType text,vimwiki setl spell
-nnoremap <silent> <leader>tc :call ToggleVar(&spell, 'spellchecker')<cr>:setl spell!<cr>
+function! ToggleSpellChecker()
+    call ToggleVar(&spell, 'spellchecker')
+    setl spell!
+endfunction
+nnoremap <silent> <leader>tc :call ToggleSpellChecker()<cr>
 " strip trailing whitespaces mode
 let stripTrailingWhitespacesMode = 1
 nnoremap <silent> <leader>tw :let stripTrailingWhitespacesMode=ToggleVar(stripTrailingWhitespacesMode, 'strip trailing whitespaces')<cr>
@@ -274,7 +286,7 @@ function! ToggleInterface(if_show)
         set showcmd
     endif
 endfunction
-nnoremap <silent> <leader>ti :let showInterfaceMode=ToggleVar(showInterfaceMode, 'show interface')<cr>:call ToggleInterface(g:showInterfaceMode)<cr>
+nnoremap <silent> <leader>ti :let showInterfaceMode=ToggleVar(showInterfaceMode, '')<cr>:call ToggleInterface(g:showInterfaceMode)<cr>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
