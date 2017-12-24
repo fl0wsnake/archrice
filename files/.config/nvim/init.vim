@@ -20,7 +20,7 @@ Plug 'tpope/vim-repeat'
 Plug 'svermeulen/vim-easyclip'
 Plug 'vim-scripts/loremipsum'
 Plug 'scrooloose/nerdtree'
-Plug 'dbakker/vim-projectroot'
+Plug 'airblade/vim-rooter'
 Plug 'arecarn/vim-selection'
 Plug 'arecarn/vim-crunch'
 Plug 'tpope/vim-endwise'
@@ -236,8 +236,6 @@ noremap <silent> <leader>aL :tab sb<cr>:call Lyrics()<cr>
 au BufEnter * silent! set formatoptions-=cro
 " transparency
 hi Normal guibg=NONE ctermbg=NONE
-" autochdir
-set autochdir
 " content if no arguments are supplied
 au VimEnter * if argc() == 0 | setl buftype=nofile | endif
 
@@ -306,6 +304,9 @@ let readOnFocusMode = 1
 nnoremap <silent> <leader>tr :let readOnFocusMode=ToggleVar(readOnFocusMode, 'read on focus')<cr>
 au FocusGained * silent! exe readOnFocusMode?'checkt':''
 
+" vim-rooter
+let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_silent_chdir = 1
 " deoplete
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#set('around', 'rank', 20)
@@ -323,18 +324,18 @@ let g:airline_section_z = airline#section#create([])
 let NERDTreeQuitOnOpen=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
-noremap <silent> <leader>ft :NERDTreeFind<cr>
-noremap <silent> <leader>pt :ProjectRootCD<cr>:NERDTreeFind<cr>
+noremap <silent> <leader>ft :NERDTree<cr>
+noremap <silent> <leader>pt :NERDTreeFind<cr>
 let g:NERDTreeMapOpenRecursively = "go"
 let g:NERDTreeMapPreview = "O"
 " fzf
 noremap <silent> <leader>ww :Windows!<cr>
 noremap <silent> <leader>pf :GFiles!<cr>
-noremap <silent> <leader>sf :call fzf#vim#ag_raw(". --hidden -U --ignore '.git*'")<cr>
-noremap <silent> <leader>ff :Files!<cr>
+noremap <silent> <leader>sf :call fzf#vim#ag_raw(". --hidden -U --ignore '.git*'", {'options': '--delimiter : --nth 4..'}, 1)<cr>
+noremap <silent> <leader>ff :call fzf#vim#ag_raw(". -g . --hidden -U --ignore '.git*'", {}, 1)<cr>
 nmap <silent> <leader>fs <leader>ff
 noremap <silent> <leader>fa :FZF! -x ~<cr>
-noremap <silent> <leader>sp :call fzf#vim#ag_raw(". --hidden --ignore '.git*'")<cr>
+noremap <silent> <leader>sp :call fzf#vim#ag_raw(". --hidden --ignore '.git*'", {'options': '--delimiter : --nth 4..'}, 1)<cr>
 noremap <silent> <leader>ss :BLines!<cr>
 nmap <silent> <leader>sl <leader>ss
 noremap <silent> <leader>s: :History:!<cr>

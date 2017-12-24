@@ -40,7 +40,8 @@ bindsym $leader+p mode "$mode_system"
 bindsym $leader+Return exec $term
 bindsym $leader+Shift+Return exec $term -d $(xcwd)
 bindsym $leader+z exec $term -e "${EDITOR:=$VISUAL}"
-bindsym $leader+Shift+z exec $term -e "${EDITOR:=$VISUAL} $(xcwd)"
+# bindsym $leader+Shift+z exec $term -e "${EDITOR:=$VISUAL} $(xcwd)"
+bindsym $leader+Shift+z exec $term -d $(xcwd) -e "${EDITOR:=$VISUAL} ."
 bindsym $leader+x exec $term -e "ranger $(xcwd)"
 bindsym $leader+Shift+p exec $term -e htop, mode "default"
 # kill focused window

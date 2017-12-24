@@ -7,4 +7,4 @@ TERMINAL=$3
 
 todos="$TERMINAL -e \"nvim -c VimwikiIndex | :set buftype=\""
 
-$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$todos"
+$I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$todos" "$todos"
