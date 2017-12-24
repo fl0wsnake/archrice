@@ -1,10 +1,10 @@
 # Here are the packages used in this i3 setup:
 # * interface:
-# ranger xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
+# xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc atools inotify-tools peek-git
+# rxvt-unicode-256xresources urxvt-perls urxvt-resize-font-git xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc atools inotify-tools peek-git
 # * apps
-# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler mupdf texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cli-visualizer clyrics qutebrowser cmus
+# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler mupdf texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cli-visualizer clyrics qutebrowser cmus wine winetricks sc-im-git
 # * ~/.config/scripts must be in $PATH
 
 set $i3dir ~/.config/i3/
@@ -13,7 +13,6 @@ set $leader Mod4
 # default tab layout
 workspace_layout default
 # font
-# font pango:DejaVu Sans Mono 8
 font Open Sans Light 14
 # no mouse scroll action
 bindsym button4 nop
@@ -39,10 +38,10 @@ mode "$mode_system" {
 bindsym $leader+p mode "$mode_system"
 # terminal, explorer, editor and process manager shortcuts
 bindsym $leader+Return exec $term
-bindsym $leader+Shift+Return exec $term -d "$(xcwd)"
+bindsym $leader+Shift+Return exec $term -d $(xcwd)
 bindsym $leader+z exec $term -e "${EDITOR:=$VISUAL}"
-bindsym $leader+Shift+z exec $term -d "$(xcwd)" -e "${EDITOR:=$VISUAL} ."
-bindsym $leader+x exec $term -d "$(xcwd)" -e "ranger ."
+bindsym $leader+Shift+z exec $term -e "${EDITOR:=$VISUAL} $(xcwd)"
+bindsym $leader+x exec $term -e "ranger $(xcwd)"
 bindsym $leader+Shift+p exec $term -e htop, mode "default"
 # kill focused window
 bindsym $leader+d kill
@@ -170,6 +169,8 @@ bindsym $leader+Control+1 exec --no-startup-id "setxkbmap us,ru"
 bindsym $leader+Control+2 exec --no-startup-id "setxkbmap us,ua"
 # screenshots
 bindsym Print exec --no-startup-id scrot ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym Shift+Print exec --no-startup-id scrot -s ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym Control+Print exec --no-startup-id peek
 # laptp fn key bindings
 # pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -180,10 +181,10 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 # borders
 hide_edge_borders smart
-new_window pixel 1
+new_window pixel 2
 # gaps
 smart_gaps on
-exec_always i3-msg gaps inner all set 2
+exec_always i3-msg gaps inner all set 3
 # colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #ffffff   #d97d19

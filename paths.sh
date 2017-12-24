@@ -15,16 +15,17 @@ declare -a paths=(
 
 ".config/vis/config"
 ".config/xylosper/bomi/pref.json"
-".config/.Xresources"
 ".config/compton.conf"
 ".config/keymap"
 ".config/wall.*"
 
+".Xresources"
 ".bashrc"
 ".zshrc"
 ".bash_profile"
 ".xprofile"
 ".latexmkrc"
+".oh-my-zsh/themes/my.zsh-theme"
 
 ".config/nvim/autoload"
 ".config/nvim/UltiSnips"

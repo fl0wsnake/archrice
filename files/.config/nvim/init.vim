@@ -24,15 +24,19 @@ Plug 'dbakker/vim-projectroot'
 Plug 'arecarn/vim-selection'
 Plug 'arecarn/vim-crunch'
 Plug 'tpope/vim-endwise'
-" js
+" javascript
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'pangloss/vim-javascript'
-" ts
+" typescript
 Plug 'mhartington/nvim-typescript'
 Plug 'leafgarland/typescript-vim'
 " elm
 Plug 'pbogut/deoplete-elm'
 Plug 'ElmCast/elm-vim'
+" vuejs
+Plug 'posva/vim-vue'
+" jade/pug
+Plug 'digitaltoad/vim-pug'
 " haskell
 Plug 'eagletmt/neco-ghc'
 Plug 'eagletmt/ghcmod-vim'
@@ -61,6 +65,8 @@ Plug 'vimwiki/vimwiki'
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 Plug 'mhinz/vim-mix-format'
+" api blueprint
+Plug 'kylef/apiblueprint.vim'
 call plug#end()
 
 " leaders
@@ -94,6 +100,7 @@ set tabstop=4
 set number
 set relativenumber
 set scrolloff=3
+set autoread
 
 " keymaps
 nnoremap <silent> <leader>at a<C-R>=strftime('%d-%m-%y')<cr><esc>
@@ -110,7 +117,7 @@ noremap <silent> <leader>fw :silent! w<cr>
 noremap <silent> <leader>fW :silent! wa<cr>
 noremap <silent> <leader>fu :set undoreload=0<cr>:e<cr>
 noremap <silent> <leader>fe :e!<cr>
-noremap <silent> <leader>fE :bufdo e!<cr>
+noremap <silent> <leader>fE :silent! bufdo e!<cr>
 noremap <silent> <leader>fn :let @+ = expand('%')<cr>
 noremap <silent> <leader>fp :let @+ = expand('%:p')<cr>
 noremap <silent> <leader>fT :set filetype=
@@ -259,7 +266,7 @@ au CursorHold * exe hlUnderCursorMode?printf('match IncSearch /\V\<%s\>/', escap
 " spellchecker mode
 set spellcapcheck=
 set spelllang=en
-au FileType text,vimwiki setl spell
+au FileType text setl spell
 function! ToggleSpellChecker()
     call ToggleVar(&spell, 'spellchecker')
     setl spell!
@@ -273,12 +280,16 @@ au BufWritePre * silent! exe stripTrailingWhitespacesMode?'%s/\s\+$//e':''
 let showInterfaceMode = 1
 function! ToggleInterface(if_show)
     if a:if_show == 0
+        set nonumber
+        set norelativenumber
         let s:hidden_all = 1
         set noshowmode
         set noruler
         set laststatus=0
         set noshowcmd
     else
+        set number
+        set relativenumber
         let s:hidden_all = 0
         set showmode
         set ruler
@@ -287,14 +298,18 @@ function! ToggleInterface(if_show)
     endif
 endfunction
 nnoremap <silent> <leader>ti :let showInterfaceMode=ToggleVar(showInterfaceMode, '')<cr>:call ToggleInterface(g:showInterfaceMode)<cr>
+" toggle table mode
+let g:table_mode_map_prefix = '<Leader>T'
+nnoremap <silent> <leader>tt :TableModeToggle<cr>
+" toggle read on focus mode
+let readOnFocusMode = 1
+nnoremap <silent> <leader>tr :let readOnFocusMode=ToggleVar(readOnFocusMode, 'read on focus')<cr>
+au FocusGained * silent! exe readOnFocusMode?'checkt':''
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#ignore_sources = {}
-" let g:deoplete#ignore_sources._ = ['buffer', 'around']
 call deoplete#custom#set('around', 'rank', 20)
 call deoplete#custom#set('buffer', 'rank', 32)
-" let g:deoplete#ignore_sources._ = ['buffer']
 au FileType markdown,tex,vimwiki,text let b:deoplete_disable_auto_complete = 1
 " airline
 let g:airline#extensions#tabline#enabled = 1
@@ -313,14 +328,13 @@ noremap <silent> <leader>pt :ProjectRootCD<cr>:NERDTreeFind<cr>
 let g:NERDTreeMapOpenRecursively = "go"
 let g:NERDTreeMapPreview = "O"
 " fzf
-let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
 noremap <silent> <leader>ww :Windows!<cr>
 noremap <silent> <leader>pf :GFiles!<cr>
-noremap <silent> <leader>sf :Ag! .<cr>
+noremap <silent> <leader>sf :call fzf#vim#ag_raw(". --hidden -U --ignore '.git*'")<cr>
 noremap <silent> <leader>ff :Files!<cr>
 nmap <silent> <leader>fs <leader>ff
 noremap <silent> <leader>fa :FZF! -x ~<cr>
-noremap <silent> <leader>sp :Ag!<cr>
+noremap <silent> <leader>sp :call fzf#vim#ag_raw(". --hidden --ignore '.git*'")<cr>
 noremap <silent> <leader>ss :BLines!<cr>
 nmap <silent> <leader>sl <leader>ss
 noremap <silent> <leader>s: :History:!<cr>
@@ -407,6 +421,8 @@ au FileType typescript noremap <buffer> <C-S-b> :TSTypeDef<cr>
 " elm
 let g:elm_format_autosave = 1
 au FileType elm nmap <buffer> K :ElmShowDocs<cr>
+" vuejs
+let g:vue_disable_pre_processors = 1
 " haskell
 let g:necoghc_enable_detailed_browse = 1
 au FileType haskell nnoremap <buffer> <silent> ,t :w<cr>:GhcModType<cr>

@@ -5,7 +5,7 @@
 export ZSH=/home/kirill/.oh-my-zsh
 
 # https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="af-magic"
+ZSH_THEME="my"
 
 # no immediately shared history
 unsetopt INC_APPEND_HISTORY
@@ -57,6 +57,7 @@ setopt nosharehistory
 plugins=(
 git
 docker
+sudo
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -86,10 +87,14 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# bash vi mode
+# set -o vi
+
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection c -o'
 alias trans='trans -no-ansi'
 alias bins='ls -t /usr/bin | head -n 16'
 alias watchtime='while true; do echo -ne "$(date +%H:%M:%S:%2N)\r"; done'
+alias screen='import ~/stuff/images/screenshots/$(date +%Y-%m-%d-%T)-screenshot.png'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

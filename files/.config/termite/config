@@ -32,35 +32,35 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-# cursor = #c5c8c6
-# cursor_foreground = #c5c8c6
-foreground = #c5c8c6
-foreground_bold = #ffffff
-background = #1e1e20
+# # cursor = #c5c8c6
+# # cursor_foreground = #c5c8c6
+# foreground = #c5c8c6
+# foreground_bold = #ffffff
+# background = #1e1e20
 
 # 20% background transparency (requires a compositor)
-background = rgba(28, 28, 28, 0.90)
+background = rgba(0, 0, 0, 0.80)
 
 # if unset, will reverse foreground and background
-highlight = #2f2f2f
+# highlight = #2f2f2f
 
 # colors from color0 to color254 can be set
-color0 = #3f3f3f
-color1 = #705050
-color2 = #60b48a
-color3 = #dfaf8f
-color4 = #506070
-color5 = #dc8cc3
-color6 = #8cd0d3
-color7 = #dcdccc
-color8 = #709080
-color9 = #dca3a3
-color10 = #c3bf9f
-color11 = #f0dfaf
-color12 = #94bff3
-color13 = #ec93d3
-color14 = #93e0e3
-color15 = #ffffff
+# color0 = #3f3f3f
+# color1 = #705050
+# color2 = #60b48a
+# color3 = #dfaf8f
+# color4 = #506070
+# color5 = #dc8cc3
+# color6 = #8cd0d3
+# color7 = #dcdccc
+# color8 = #709080
+# color9 = #dca3a3
+# color10 = #c3bf9f
+# color11 = #f0dfaf
+# color12 = #94bff3
+# color13 = #ec93d3
+# color14 = #93e0e3
+# color15 = #ffffff
 
 [hints]
 #font = Monospace 12

@@ -1,0 +1,141 @@
+/* *foreground: #00cc00 */
+/* *foreground_bold: #a8a19f */
+/* *cursor: #a8a19f */
+!!background      = #1b1918
+!!*background: rgba(0, 0, 0, .7)
+
+! hard contrast: *background: #1d2021
+*background: #282828
+! soft contrast: *background: #32302f
+*foreground: #ebdbb2
+!! black
+*color0: #1b1918
+*color8: #766e6b
+!! red
+*color1: #f22c40
+*color9: #f22c40
+!! green
+*color2: #5ab738
+*color10: #5ab738
+!! yellow
+*color3: #d5911a
+*color11: #d5911a
+!! blue
+*color4: #407ee7
+*color12: #407ee7
+!! magenta
+*color5: #6666ea
+*color13: #6666ea
+!! cyan
+*color6: #00ad9c
+*color14: #00ad9c
+!! white
+*color7: #a8a19f
+*color15: #f1efee
+!! orange
+*color16: #d97d19
+
+/* ! hard contrast: *background: #1d2021 */
+/* *background: #282828 */
+/* ! soft contrast: *background: #32302f */
+/* *foreground: #ebdbb2 */
+/* ! Black + DarkGrey */
+/* *color0:  #282828 */
+/* *color8:  #928374 */
+/* ! DarkRed + Red */
+/* *color1:  #cc241d */
+/* *color9:  #fb4934 */
+/* ! DarkGreen + Green */
+/* *color2:  #98971a */
+/* *color10: #b8bb26 */
+/* ! DarkYellow + Yellow */
+/* *color3:  #d79921 */
+/* *color11: #fabd2f */
+/* ! DarkBlue + Blue */
+/* *color4:  #458588 */
+/* *color12: #83a598 */
+/* ! DarkMagenta + Magenta */
+/* *color5:  #b16286 */
+/* *color13: #d3869b */
+/* ! DarkCyan + Cyan */
+/* *color6:  #689d6a */
+/* *color14: #8ec07c */
+/* ! LightGrey + White */
+/* *color7:  #a89984 */
+/* *color15: #ebdbb2 */
+
+URxvt.color24:  #076678
+URxvt.color66:  #427b58
+URxvt.color88:  #9d0006
+URxvt.color96:  #8f3f71
+URxvt.color100: #79740e
+URxvt.color108: #8ec07c
+URxvt.color109: #83a598
+URxvt.color130: #af3a03
+URxvt.color136: #b57614
+URxvt.color142: #b8bb26
+URxvt.color167: #fb4934
+URxvt.color175: #d3869b
+URxvt.color208: #fe8019
+URxvt.color214: #fabd2f
+URxvt.color223: #ebdbb2
+URxvt.color228: #f2e5bc
+URxvt.color229: #fbf1c7
+URxvt.color230: #f9f5d7
+URxvt.color234: #1d2021
+URxvt.color235: #282828
+URxvt.color236: #32302f
+URxvt.color237: #3c3836
+URxvt.color239: #504945
+URxvt.color241: #665c54
+URxvt.color243: #7c6f64
+URxvt.color244: #928374
+URxvt.color245: #928374
+URxvt.color246: #a89984
+URxvt.color248: #bdae93
+URxvt.color250: #d5c4a1
+
+
+URxvt.intensityStyles:	false
+URxvt.background:       [80]#000000
+URxvt.depth:		32
+URxvt.font: 		xft:monospace:size=10
+URxvt.scrollBar:	false
+/* URxvt.cursorColor:	white */
+URxvt.cursorColor:	magenta
+#include ".urxvt/ext/config"
+/* URxvt*perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select,focus */
+URxvt*perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select,focus-events
+URxvt.colorUL:		#4682B4
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher:	/usr/bin/xdg-open
+URxvt.url-select.underline:	true
+
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+
+URxvt.perl-lib:		$HOME/.config/Scripts
+URxvt.resize-font.smaller:	C-j
+URxvt.resize-font.bigger:	C-k
+
+URxvt.url-launcher:	/usr/bin/xdg-open
+URxvt.matcher.button:	1
+
+
+rofi.color-window: argb:d0000000, #373B47
+rofi.color-normal: argb:00373B47, #d97d19, argb:00373B47, argb:20d97d19, #FFAC52
+rofi.color-urgent: argb:00373B47, #FFAC52, argb:90000000, argb:20d97d19, #FFAC52
+rofi.color-active: argb:00373B47, #FFAC52, argb:90000000, argb:20d97d19, #FFAC52
+
+rofi.fake-transparency:	true
+
+rofi.font: Open Sans Light 14
+rofi.width: 48
+rofi.lines: 12
+rofi.padding: 2
+
+rofi.bw: 0
+rofi.eh: 1
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+rofi.show-icons: true
+rofi.modi: window,run,drun
