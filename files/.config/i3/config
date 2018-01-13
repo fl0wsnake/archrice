@@ -39,9 +39,8 @@ bindsym $leader+p mode "$mode_system"
 # terminal, explorer, editor and process manager shortcuts
 bindsym $leader+Return exec $term
 bindsym $leader+Shift+Return exec $term -d $(xcwd)
-bindsym $leader+z exec $term -e "${EDITOR:=$VISUAL}"
-# bindsym $leader+Shift+z exec $term -e "${EDITOR:=$VISUAL} $(xcwd)"
-bindsym $leader+Shift+z exec $term -d $(xcwd) -e "${EDITOR:=$VISUAL} ."
+bindsym $leader+z exec $term -d $(xcwd) -e "${EDITOR:=$VISUAL}"
+bindsym $leader+Shift+z exec ${BROWSER:=chromium}
 bindsym $leader+x exec $term -e "ranger $(xcwd)"
 bindsym $leader+Shift+p exec $term -e htop, mode "default"
 # kill focused window
@@ -182,10 +181,10 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 # borders
 hide_edge_borders smart
-new_window pixel 2
+new_window none
 # gaps
 smart_gaps on
-exec_always i3-msg gaps inner all set 3
+exec_always i3-msg gaps inner all set 2
 # colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #ffffff   #d97d19
@@ -196,7 +195,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 # startup commands
-exec_always --no-startup-id xrdb ~/.config/.Xresources && ~/.config/polybar/launch
+exec_always --no-startup-id xrdb ~/.Xresources && ~/.config/polybar/launch
 # no beep
 exec_always --no-startup-id xset -b
 exec --no-startup-id nm-applet

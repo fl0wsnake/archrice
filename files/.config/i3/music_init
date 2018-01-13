@@ -5,7 +5,7 @@ WORKSPACENAME=$1
 LAYOUT=$2
 TERMINAL=$3
 
-visualizer="urxvt -e vis"
+visualizer="$TERMINAL -e vis"
 lyrics="sleep 0.4 && $TERMINAL -e nvim"
 pandora="sleep 0.8 && $TERMINAL -e pianobar"
 

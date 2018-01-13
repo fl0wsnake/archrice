@@ -69,10 +69,12 @@ Plug 'mhinz/vim-mix-format'
 Plug 'kylef/apiblueprint.vim'
 call plug#end()
 
+" au BufEnter * silent! if bufname('%') == '' | setl buftype=nowrite | endif
 " leaders
 let mapleader="\<Space>"
 let maplocalleader=","
 " sets
+set mouse=a
 set timeoutlen=1500
 set linebreak
 set noswapfile
@@ -93,21 +95,31 @@ set hidden
 syntax on
 colorscheme gruvbox
 set background=dark
-set termguicolors
-set expandtab
-set shiftwidth=4
-set tabstop=4
 set number
 set relativenumber
 set scrolloff=3
 set autoread
+" indentation
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+" for termite
+set termguicolors
 
+" some functions
+function! ScratchBuffer()
+    enew
+    setl buftype=nofile
+endfunction
 " keymaps
-nnoremap <silent> <leader>at a<C-R>=strftime('%d-%m-%y')<cr><esc>
-vnoremap <silent> <leader>at c<C-R>=strftime('%d-%m-%y')<cr><esc>
-nnoremap <silent> <leader>aT a<C-R>=strftime('%d-%m-%y-%H:%M')<cr><esc>
-vnoremap <silent> <leader>aT c<C-R>=strftime('%d-%m-%y-%H:%M')<cr><esc>
-noremap <silent> <leader>bs :enew<cr>:setl buftype=nowrite<cr>
+nnoremap <silent> <leader>at a<C-R>=strftime('%d.%m.%y')<cr><esc>
+vnoremap <silent> <leader>at c<C-R>=strftime('%d.%m.%y')<cr><esc>
+nnoremap <silent> <leader>aT a<C-R>=strftime('%d.%m.%y_%H:%M')<cr><esc>
+vnoremap <silent> <leader>aT c<C-R>=strftime('%d.%m.%y_%H:%M')<cr><esc>
+noremap <silent> <leader>br :bufdo bd<cr>:setl buftype=nofile<cr>
+noremap <silent> <leader>bs :call ScratchBuffer()<cr>
+noremap <silent> <leader>bd :bd!<cr>
+noremap <silent> <leader>bD :silent! w \| %bd \| e#<cr>
 noremap <silent> <leader>wd :q<cr>
 noremap <silent> <leader>wD :q!<cr>
 noremap <silent> <leader>wv :vsplit<cr>
@@ -120,6 +132,8 @@ noremap <silent> <leader>fe :e!<cr>
 noremap <silent> <leader>fE :silent! bufdo e!<cr>
 noremap <silent> <leader>fn :let @+ = expand('%')<cr>
 noremap <silent> <leader>fp :let @+ = expand('%:p')<cr>
+noremap <silent> <leader>fP :let @+ = expand('%:p:h')<cr>
+noremap <silent> <leader>fc :execute 'e' expand('%:r').'_.'.expand('%:e')<cr>
 noremap <silent> <leader>fT :set filetype=
 noremap <silent> <leader>qq :qa<cr>
 noremap <silent> <leader>qQ :qa!<cr>
@@ -140,8 +154,6 @@ function! DeleteFileAndBuffer()
     endif
 endfunction
 noremap <silent> <leader>fd :call delete(expand('%'))<cr>:set modified<cr>
-noremap <silent> <leader>bd :bd!<cr>
-noremap <silent> <leader>bD :silent! w \| %bd \| e#<cr>
 noremap <silent> <leader>fm :Rename<space>
 noremap <silent> <M-h> :bprevious<cr>
 noremap <silent> <M-l> :bnext<cr>
@@ -226,10 +238,26 @@ function! Lyrics()
             exe system("clyrics " . l:song_name . ">" . l:song_path)
         endif
     endif
-    exe "e" fnameescape(l:song_path) | setl buftype=nowrite
+    exe "e" fnameescape(l:song_path)
+    au BufEnter * set buftype=nowrite
 endfunction
 noremap <silent> <leader>al :call Lyrics()<cr>
 noremap <silent> <leader>aL :tab sb<cr>:call Lyrics()<cr>
+
+" modify selected text using combining diacritics
+command! -range -nargs=0 Overline        call s:CombineSelection(<line1>, <line2>, '0305')
+command! -range -nargs=0 Underline       call s:CombineSelection(<line1>, <line2>, '0332')
+command! -range -nargs=0 DoubleUnderline call s:CombineSelection(<line1>, <line2>, '0333')
+command! -range -nargs=0 Strikethrough   call s:CombineSelection(<line1>, <line2>, '0336')
+function! s:CombineSelection(line1, line2, cp)
+  execute 'let char = "\u'.a:cp.'"'
+  execute a:line1.','.a:line2.'s/\%V[^[:cntrl:]]/&'.char.'/ge'
+endfunction
+vnoremap <silent> <leader>to :Overline<cr>
+vnoremap <silent> <leader>tu :Underline<cr>
+vnoremap <silent> <leader>td :DoubleUnderline<cr>
+vnoremap <silent> <leader>ts :Strikethrough<cr>
+noremap <silent> <leader>tl :set spelllang=
 
 " global settings
 " no comment formatting
@@ -243,36 +271,34 @@ au VimEnter * if argc() == 0 | setl buftype=nofile | endif
 function! ToggleVar(var, message)
     if a:var
         if a:message != ''
-            echo a:message.'mode OFF'
+            echo a:message.' mode OFF'
         endif
         return 0
     else
         if a:message != ''
-            echo a:message.'mode ON'
+            echo a:message.' mode ON'
         endif
         return 1
     endif
 endfunction
 " autosave buffers on focus loss mode
 let autoSaveMode = 1
-nnoremap <silent> <leader>ts :let autoSaveMode=ToggleVar(autoSaveMode, 'autosave buffers')<cr>
+nnoremap <silent> <leader>ms :let autoSaveMode=ToggleVar(autoSaveMode, 'autosave buffers')<cr>
 au FocusLost * silent! exe autoSaveMode?'wa':''
 " highlight symbol under cursor mode
-let hlUnderCursorMode = 0
-nnoremap <silent> <leader>th :let hlUnderCursorMode=ToggleVar(hlUnderCursorMode, 'symbol highlight')<cr>
-au CursorHold * exe hlUnderCursorMode?printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\')):'match none'
+let highlightSymbolMode = 0
+nnoremap <silent> <leader>mH :let highlightSymbolMode=ToggleVar(highlightSymbolMode, 'symbol highlight')<cr>
+au CursorHold * exe highlightSymbolMode?printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\')):'match none'
+" hlsearch mode
+nnoremap <silent> <leader>mh :call ToggleVar(&hlsearchMode, 'hlsearch')<cr>:set hlsearch!<cr>
 " spellchecker mode
 set spellcapcheck=
 set spelllang=en
 au FileType text setl spell
-function! ToggleSpellChecker()
-    call ToggleVar(&spell, 'spellchecker')
-    setl spell!
-endfunction
-nnoremap <silent> <leader>tc :call ToggleSpellChecker()<cr>
+nnoremap <silent> <leader>mc :call ToggleVar(&spell, 'spellchecker')<cr>:set spell!<cr>
 " strip trailing whitespaces mode
 let stripTrailingWhitespacesMode = 1
-nnoremap <silent> <leader>tw :let stripTrailingWhitespacesMode=ToggleVar(stripTrailingWhitespacesMode, 'strip trailing whitespaces')<cr>
+nnoremap <silent> <leader>mw :let stripTrailingWhitespacesMode=ToggleVar(stripTrailingWhitespacesMode, 'strip trailing whitespaces')<cr>
 au BufWritePre * silent! exe stripTrailingWhitespacesMode?'%s/\s\+$//e':''
 " show interface mode
 let showInterfaceMode = 1
@@ -295,13 +321,13 @@ function! ToggleInterface(if_show)
         set showcmd
     endif
 endfunction
-nnoremap <silent> <leader>ti :let showInterfaceMode=ToggleVar(showInterfaceMode, '')<cr>:call ToggleInterface(g:showInterfaceMode)<cr>
+nnoremap <silent> <leader>mi :let showInterfaceMode=ToggleVar(showInterfaceMode, '')<cr>:call ToggleInterface(g:showInterfaceMode)<cr>
 " toggle table mode
 let g:table_mode_map_prefix = '<Leader>T'
-nnoremap <silent> <leader>tt :TableModeToggle<cr>
+nnoremap <silent> <leader>mt :TableModeToggle<cr>
 " toggle read on focus mode
 let readOnFocusMode = 1
-nnoremap <silent> <leader>tr :let readOnFocusMode=ToggleVar(readOnFocusMode, 'read on focus')<cr>
+nnoremap <silent> <leader>mr :let readOnFocusMode=ToggleVar(readOnFocusMode, 'read on focus')<cr>
 au FocusGained * silent! exe readOnFocusMode?'checkt':''
 
 " vim-rooter
@@ -332,7 +358,8 @@ let g:NERDTreeMapPreview = "O"
 noremap <silent> <leader>ww :Windows!<cr>
 noremap <silent> <leader>pf :GFiles!<cr>
 noremap <silent> <leader>sf :call fzf#vim#ag_raw(". --hidden -U --ignore '.git*'", {'options': '--delimiter : --nth 4..'}, 1)<cr>
-noremap <silent> <leader>ff :call fzf#vim#ag_raw(". -g . --hidden -U --ignore '.git*'", {}, 1)<cr>
+" noremap <silent> <leader>ff :call fzf#vim#ag_raw(". -l --hidden -U --ignore '.git*'", {}, 1)<cr>
+noremap <silent> <leader>ff :FZF!<cr>
 nmap <silent> <leader>fs <leader>ff
 noremap <silent> <leader>fa :FZF! -x ~<cr>
 noremap <silent> <leader>sp :call fzf#vim#ag_raw(". --hidden --ignore '.git*'", {'options': '--delimiter : --nth 4..'}, 1)<cr>
@@ -386,7 +413,17 @@ nmap <silent> <leader>ow <plug>VimwikiIndex
 nmap <silent> <leader>oW <plug>VimwikiTabIndex
 nmap <silent> <leader>os <plug>VimwikiUISelect
 nmap <silent> <leader>oi <plug>VimwikiDiaryIndex
-nmap <silent> <leader>od :<C-U>let g:vimwiki_current_idx=v:count1 - 1<cr><plug>VimwikiMakeDiaryNote
+function! VimwikiMakeDiaryNoteFixed(count)
+  if a:count == 2
+      " au filetype vimwiki if expand('%:p:h').'/' == expand(g:vimwiki_path.'/'.g:vdiary.diary_rel_path) | setl spell
+      " setl spell
+      set spell
+  endif
+  echo a:count
+  let g:vimwiki_current_idx=v:count1 - 1
+  VimwikiMakeDiaryNote
+endfunction
+nmap <silent> <leader>od :<c-u>:call VimwikiMakeDiaryNoteFixed(v:count)<cr>
 nmap <silent> <leader>oD :<C-U>let g:vimwiki_current_idx=v:count1 - 1<cr><plug>VimwikiTabMakeDiaryNote
 nmap <silent> <leader>oy <plug>VimwikiMakeYesterdayDiaryNote
 nmap <silent> <leader>og <plug>VimwikiDiaryGenerateLinks
@@ -410,6 +447,7 @@ vnoremap <silent> <leader>ac :,Crunch!<cr>
 vnoremap <silent> <leader>ae :Crunch<cr>
 
 " languages
+au FileType javascript setl softtabstop=2 shiftwidth=2
 " format
 au FileType javascript,sh au BufWritePre * :Autoformat
 " ts

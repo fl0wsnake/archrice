@@ -35,6 +35,9 @@
 !! orange
 *color16: #d97d19
 
+!! fading when focus is lost
+URxvt.fading: 20
+
 /* ! hard contrast: *background: #1d2021 */
 /* *background: #282828 */
 /* ! soft contrast: *background: #32302f */
@@ -104,8 +107,7 @@ URxvt.scrollBar:	false
 /* URxvt.cursorColor:	white */
 URxvt.cursorColor:	magenta
 #include ".urxvt/ext/config"
-/* URxvt*perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select,focus */
-URxvt*perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select,focus-events
+URxvt*perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select,focus-events,focus
 URxvt.colorUL:		#4682B4
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher:	/usr/bin/xdg-open
