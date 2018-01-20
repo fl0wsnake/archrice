@@ -2,7 +2,7 @@
 # * interface:
 # xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome
 # * utilities:
-# rxvt-unicode-256xresources urxvt-perls urxvt-resize-font-git xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc atools inotify-tools peek-git
+# texlive-langcyrillic xdotool rxvt-unicode-256xresources urxvt-perls urxvt-resize-font-git xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc atools inotify-tools peek-git
 # * apps
 # neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler mupdf texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cli-visualizer clyrics qutebrowser cmus wine winetricks sc-im-git
 # * ~/.config/scripts must be in $PATH
@@ -163,7 +163,7 @@ bindsym $leader+u resize grow height 10 px or 10 ppt
 bindsym $leader+i resize shrink height 10 px or 10 ppt
 bindsym $leader+o resize grow width 10 px or 10 ppt
 # keyboard layout (input languages)
-exec --no-startup-id xmodmap ~/.config/keymap
+# exec --no-startup-id xmodmap ~/.config/keymap
 exec --no-startup-id setxkbmap -option grp:switch,grp:caps_toggle,grp_led:caps us,ru
 bindsym $leader+Control+1 exec --no-startup-id "setxkbmap us,ru"
 bindsym $leader+Control+2 exec --no-startup-id "setxkbmap us,ua"
@@ -180,8 +180,11 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 # borders
-hide_edge_borders smart
+# hide_edge_borders smart
+# hide_edge_borders both
+# hide_edge_borders none
 new_window none
+new_float none
 # gaps
 smart_gaps on
 exec_always i3-msg gaps inner all set 2

@@ -108,15 +108,20 @@ set termguicolors
 
 " some functions
 function! ScratchBuffer()
-    enew
-    setl buftype=nofile
+    if bufexists('Scratch')
+        b Scratch
+    else
+        enew
+        setl buftype=nofile
+        silent file Scratch
+    endif
 endfunction
 " keymaps
 nnoremap <silent> <leader>at a<C-R>=strftime('%d.%m.%y')<cr><esc>
 vnoremap <silent> <leader>at c<C-R>=strftime('%d.%m.%y')<cr><esc>
 nnoremap <silent> <leader>aT a<C-R>=strftime('%d.%m.%y_%H:%M')<cr><esc>
 vnoremap <silent> <leader>aT c<C-R>=strftime('%d.%m.%y_%H:%M')<cr><esc>
-noremap <silent> <leader>br :bufdo bd<cr>:setl buftype=nofile<cr>
+noremap <silent> <leader>br :bufdo bd<cr>:call ScratchBuffer()<cr>
 noremap <silent> <leader>bs :call ScratchBuffer()<cr>
 noremap <silent> <leader>bd :bd!<cr>
 noremap <silent> <leader>bD :silent! w \| %bd \| e#<cr>
@@ -131,8 +136,8 @@ noremap <silent> <leader>fu :set undoreload=0<cr>:e<cr>
 noremap <silent> <leader>fe :e!<cr>
 noremap <silent> <leader>fE :silent! bufdo e!<cr>
 noremap <silent> <leader>fn :let @+ = expand('%')<cr>
-noremap <silent> <leader>fp :let @+ = expand('%:p')<cr>
-noremap <silent> <leader>fP :let @+ = expand('%:p:h')<cr>
+noremap <silent> <leader>fp :let @+ = expand('%:p:h')<cr>
+noremap <silent> <leader>fP :let @+ = expand('%:p')<cr>
 noremap <silent> <leader>fc :execute 'e' expand('%:r').'_.'.expand('%:e')<cr>
 noremap <silent> <leader>fT :set filetype=
 noremap <silent> <leader>qq :qa<cr>
@@ -253,11 +258,17 @@ function! s:CombineSelection(line1, line2, cp)
   execute 'let char = "\u'.a:cp.'"'
   execute a:line1.','.a:line2.'s/\%V[^[:cntrl:]]/&'.char.'/ge'
 endfunction
-vnoremap <silent> <leader>to :Overline<cr>
-vnoremap <silent> <leader>tu :Underline<cr>
-vnoremap <silent> <leader>td :DoubleUnderline<cr>
-vnoremap <silent> <leader>ts :Strikethrough<cr>
+vnoremap <silent> <leader>tO :Overline<cr>
+vnoremap <silent> <leader>tU :Underline<cr>
+vnoremap <silent> <leader>tD :DoubleUnderline<cr>
+vnoremap <silent> <leader>tS :Strikethrough<cr>
 noremap <silent> <leader>tl :set spelllang=
+" snake to camel case
+noremap <silent> <leader>tc :s#_\(\l\)#\u\1#g<cr>
+" snake to pascal case
+noremap <silent> <leader>tC :s#\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)#\u\1\2#g<cr>
+" camel to snake case
+noremap <silent> <leader>ts :s#\C\(\<\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#g<cr>
 
 " global settings
 " no comment formatting
@@ -265,7 +276,7 @@ au BufEnter * silent! set formatoptions-=cro
 " transparency
 hi Normal guibg=NONE ctermbg=NONE
 " content if no arguments are supplied
-au VimEnter * if argc() == 0 | setl buftype=nofile | endif
+au VimEnter * if argc() == 0 | call ScratchBuffer() | endif
 
 " modes
 function! ToggleVar(var, message)
@@ -290,7 +301,7 @@ let highlightSymbolMode = 0
 nnoremap <silent> <leader>mH :let highlightSymbolMode=ToggleVar(highlightSymbolMode, 'symbol highlight')<cr>
 au CursorHold * exe highlightSymbolMode?printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\')):'match none'
 " hlsearch mode
-nnoremap <silent> <leader>mh :call ToggleVar(&hlsearchMode, 'hlsearch')<cr>:set hlsearch!<cr>
+nnoremap <silent> <leader>mh :call ToggleVar(&hlsearch, 'hlsearch')<cr>:set hlsearch!<cr>
 " spellchecker mode
 set spellcapcheck=
 set spelllang=en
@@ -368,7 +379,8 @@ nmap <silent> <leader>sl <leader>ss
 noremap <silent> <leader>s: :History:!<cr>
 noremap <silent> <leader>sc :History:!<cr>
 noremap <silent> <leader>s/ :History/!<cr>
-noremap <silent> <leader>/ :exe '/' . expand("<cword>")<cr>
+nnoremap <silent> <leader>/ :exe '/' . expand("<cword>")<cr>
+vnoremap / y/<C-R>"<CR>
 noremap <silent> <leader>fr :History!<cr>
 noremap <silent> <leader>fR :tabe<cr>:History!<cr>
 " easyclip

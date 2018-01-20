@@ -36,7 +36,7 @@
 *color16: #d97d19
 
 !! fading when focus is lost
-URxvt.fading: 20
+URxvt.fading: 16
 
 /* ! hard contrast: *background: #1d2021 */
 /* *background: #282828 */
@@ -100,7 +100,7 @@ URxvt.color250: #d5c4a1
 
 
 URxvt.intensityStyles:	false
-URxvt.background:       [80]#000000
+URxvt.background:       [84]#000000
 URxvt.depth:		32
 URxvt.font: 		xft:monospace:size=10
 URxvt.scrollBar:	false

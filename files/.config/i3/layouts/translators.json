@@ -1,14 +1,13 @@
 // vim:ts=4:sw=4:et
 {
     // tabbed split container with 3 children
-    "border": "pixel",
+    "border": "none",
     "floating": "auto_off",
     "layout": "tabbed",
     "percent": null,
     "type": "con",
     "nodes": [{
-        "border": "pixel",
-        "current_border_width": 1,
+        "border": "none",
         "floating": "auto_off",
         "geometry": {
             "height": 550,
