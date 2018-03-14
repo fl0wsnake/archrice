@@ -169,9 +169,9 @@ bindsym $leader+Control+1 exec --no-startup-id "setxkbmap us,ru"
 bindsym $leader+Control+2 exec --no-startup-id "setxkbmap us,ua"
 # screenshots
 bindsym Print exec --no-startup-id scrot ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
-bindsym Shift+Print exec --no-startup-id scrot -s ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym Shift+Print exec --no-startup-id sleep 0.5 && scrot -s ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
 bindsym Control+Print exec --no-startup-id peek
-# laptp fn key bindings
+# laptop fn key bindings
 # pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
@@ -205,11 +205,10 @@ exec --no-startup-id nm-applet
 exec --no-startup-id $i3dir/touchpad_disable
 exec --no-startup-id wallp
 exec --no-startup-id unclutter --timeout 1
-exec --no-startup-id compton
+exec --no-startup-id compton -c
 exec --no-startup-id udiskie
 exec --no-startup-id transmission-daemon
 
 exec --no-startup-id dropboxd
-exec --no-startup-id ~/apps/org_backup/org-watch-log
 
 exec i3-msg workspace $1_workspace

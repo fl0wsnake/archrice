@@ -24,6 +24,7 @@ Plug 'airblade/vim-rooter'
 Plug 'arecarn/vim-selection'
 Plug 'arecarn/vim-crunch'
 Plug 'tpope/vim-endwise'
+Plug 'Yggdroot/indentLine'
 " javascript
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'pangloss/vim-javascript'
@@ -53,9 +54,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'othree/xml.vim'
 " LaTeX
 Plug 'lervag/vimtex'
-Plug 'xuhdev/vim-latex-live-preview'
 " markdown
-" Plug 'godlygeek/tabular'
 Plug 'gabrielelana/vim-markdown'
 Plug 'suan/vim-instant-markdown'
 Plug 'dhruvasagar/vim-table-mode'
@@ -69,7 +68,6 @@ Plug 'mhinz/vim-mix-format'
 Plug 'kylef/apiblueprint.vim'
 call plug#end()
 
-" au BufEnter * silent! if bufname('%') == '' | setl buftype=nowrite | endif
 " leaders
 let mapleader="\<Space>"
 let maplocalleader=","
@@ -117,14 +115,16 @@ function! ScratchBuffer()
     endif
 endfunction
 " keymaps
-nnoremap <silent> <leader>at a<C-R>=strftime('%d.%m.%y')<cr><esc>
-vnoremap <silent> <leader>at c<C-R>=strftime('%d.%m.%y')<cr><esc>
-nnoremap <silent> <leader>aT a<C-R>=strftime('%d.%m.%y_%H:%M')<cr><esc>
-vnoremap <silent> <leader>aT c<C-R>=strftime('%d.%m.%y_%H:%M')<cr><esc>
+nnoremap <silent> <C-c> :Commentary<cr>j
+nnoremap <silent> <leader>at a<C-R>=strftime('%Y-%m-%d')<cr><esc>
+vnoremap <silent> <leader>at c<C-R>=strftime('%Y-%m-%d')<cr><esc>
+nnoremap <silent> <leader>aT a<C-R>=strftime('%Y-%m-%dT%T%z')<cr><esc>
+vnoremap <silent> <leader>aT c<C-R>=strftime('%Y-%m-%dT%T%z')<cr><esc>
 noremap <silent> <leader>br :bufdo bd<cr>:call ScratchBuffer()<cr>
 noremap <silent> <leader>bs :call ScratchBuffer()<cr>
 noremap <silent> <leader>bd :bd!<cr>
 noremap <silent> <leader>bD :silent! w \| %bd \| e#<cr>
+noremap <silent> <leader>c :call ScratchBuffer()<cr>
 noremap <silent> <leader>wd :q<cr>
 noremap <silent> <leader>wD :q!<cr>
 noremap <silent> <leader>wv :vsplit<cr>
@@ -209,7 +209,7 @@ let g:UltiSnipsExpandTrigger='<C-P>'
 " completion enter behaviour
 inoremap <silent> <cr> <C-r>=<SID>my_cr_function()<cr>
 function! s:my_cr_function() abort
-    return deoplete#mappings#smart_close_popup() . "\<CR>"
+    return deoplete#mappings#smart_close_popup() . "\<cr>"
 endfunction
 
 " translator
@@ -225,7 +225,7 @@ function! Trans()
             exe system("trans -no-ansi en: " . l:word . ">" . l:word_path)
         endif
     endif
-    exe "e" fnameescape(l:word_path) | setl buftype=nowrite
+    exe "e" fnameescape(l:word_path)
 endfunction
 noremap <silent> <leader>ad :call Trans()<cr>
 noremap <silent> <leader>aD :tab sb<cr>:call Trans()<cr>
@@ -244,7 +244,6 @@ function! Lyrics()
         endif
     endif
     exe "e" fnameescape(l:song_path)
-    au BufEnter * set buftype=nowrite
 endfunction
 noremap <silent> <leader>al :call Lyrics()<cr>
 noremap <silent> <leader>aL :tab sb<cr>:call Lyrics()<cr>
@@ -255,8 +254,8 @@ command! -range -nargs=0 Underline       call s:CombineSelection(<line1>, <line2
 command! -range -nargs=0 DoubleUnderline call s:CombineSelection(<line1>, <line2>, '0333')
 command! -range -nargs=0 Strikethrough   call s:CombineSelection(<line1>, <line2>, '0336')
 function! s:CombineSelection(line1, line2, cp)
-  execute 'let char = "\u'.a:cp.'"'
-  execute a:line1.','.a:line2.'s/\%V[^[:cntrl:]]/&'.char.'/ge'
+    execute 'let char = "\u'.a:cp.'"'
+    execute a:line1.','.a:line2.'s/\%V[^[:cntrl:]]/&'.char.'/ge'
 endfunction
 vnoremap <silent> <leader>tO :Overline<cr>
 vnoremap <silent> <leader>tU :Underline<cr>
@@ -369,7 +368,6 @@ let g:NERDTreeMapPreview = "O"
 noremap <silent> <leader>ww :Windows!<cr>
 noremap <silent> <leader>pf :GFiles!<cr>
 noremap <silent> <leader>sf :call fzf#vim#ag_raw(". --hidden -U --ignore '.git*'", {'options': '--delimiter : --nth 4..'}, 1)<cr>
-" noremap <silent> <leader>ff :call fzf#vim#ag_raw(". -l --hidden -U --ignore '.git*'", {}, 1)<cr>
 noremap <silent> <leader>ff :FZF!<cr>
 nmap <silent> <leader>fs <leader>ff
 noremap <silent> <leader>fa :FZF! -x ~<cr>
@@ -403,37 +401,37 @@ let g:vimwiki_template_ext = '.html'
 let g:vimwiki_syntax = 'markdown'
 let g:vjournal = {}
 let g:vjournal.path = g:vimwiki_path
+let g:vjournal.ext = '.md'
+let g:vjournal.syntax = g:vimwiki_syntax
 let g:vjournal.path_html = g:vimwiki_path_html
 let g:vjournal.diary_rel_path = 'journal/'
 let g:vjournal.diary_index = 'journal_index'
 let g:vjournal.diary_header = 'Journal'
 let g:vjournal.template_path = g:vimwiki_template_path
 let g:vjournal.template_ext = g:vimwiki_template_ext
-let g:vjournal.syntax = g:vimwiki_syntax
 let g:vdiary = {}
 let g:vdiary.path = g:vimwiki_path
+let g:vdiary.ext = '.md'
+let g:vdiary.syntax = g:vimwiki_syntax
 let g:vdiary.path_html = g:vimwiki_path_html
 let g:vdiary.diary_rel_path = 'diary/'
 let g:vdiary.diary_index = 'diary_index'
 let g:vdiary.diary_header = 'Diary'
 let g:vdiary.template_path = g:vimwiki_template_path
 let g:vdiary.template_ext = g:vimwiki_template_ext
-let g:vdiary.syntax = g:vimwiki_syntax
 let g:vimwiki_list = [g:vjournal, g:vdiary]
-au FileType vimwiki vmap <silent> ,u :s/ /_/g<cr>
 nmap <silent> <leader>ow <plug>VimwikiIndex
 nmap <silent> <leader>oW <plug>VimwikiTabIndex
 nmap <silent> <leader>os <plug>VimwikiUISelect
 nmap <silent> <leader>oi <plug>VimwikiDiaryIndex
 function! VimwikiMakeDiaryNoteFixed(count)
-  if a:count == 2
-      " au filetype vimwiki if expand('%:p:h').'/' == expand(g:vimwiki_path.'/'.g:vdiary.diary_rel_path) | setl spell
-      " setl spell
-      set spell
-  endif
-  echo a:count
-  let g:vimwiki_current_idx=v:count1 - 1
-  VimwikiMakeDiaryNote
+    if a:count == 2
+        " setl spell
+        set spell
+    endif
+    echo a:count
+    let g:vimwiki_current_idx=v:count1 - 1
+    VimwikiMakeDiaryNote
 endfunction
 nmap <silent> <leader>od :<c-u>:call VimwikiMakeDiaryNoteFixed(v:count)<cr>
 nmap <silent> <leader>oD :<C-U>let g:vimwiki_current_idx=v:count1 - 1<cr><plug>VimwikiTabMakeDiaryNote
@@ -442,11 +440,14 @@ nmap <silent> <leader>og <plug>VimwikiDiaryGenerateLinks
 nmap <silent> <leader>or <plug>VimwikiRenameLink
 nmap <silent> <leader>oq <plug>VimwikiDeleteLink
 nmap <silent> <leader>ot :VimwikiTOC<cr>
-nmap <silent> <leader>on :exe "e" g:vimwiki_main.path . '/notes.wiki'<cr>
+nmap <silent> <leader>on :exe "e" g:vimwiki_main.path . '/notes.md'<cr>
 " markdown
+
+let g:markdown_enable_conceal = 1
 let g:markdown_enable_mappings = 0
 let g:markdown_include_jekyll_support = 0
 let g:markdown_enable_input_abbreviations = 0
+
 " markdown preview
 au FileType markdown,vimwiki noremap <silent> ,p :InstantMarkdownPreview<cr>
 let g:instant_markdown_autostart = 0
@@ -457,9 +458,12 @@ nnoremap <silent> <leader>ac :,Crunch!<cr>
 nnoremap <silent> <leader>ae :,Crunch<cr>
 vnoremap <silent> <leader>ac :,Crunch!<cr>
 vnoremap <silent> <leader>ae :Crunch<cr>
+" indentLine
+let g:indentLine_enabled = 0
+au FileType html,vue let g:indentLine_enabled = 1
 
 " languages
-au FileType javascript setl softtabstop=2 shiftwidth=2
+au FileType javascript,vue setl softtabstop=2 shiftwidth=2
 " format
 au FileType javascript,sh au BufWritePre * :Autoformat
 " ts
@@ -478,9 +482,6 @@ let g:vue_disable_pre_processors = 1
 let g:necoghc_enable_detailed_browse = 1
 au FileType haskell nnoremap <buffer> <silent> ,t :w<cr>:GhcModType<cr>
 au FileType haskell nnoremap <buffer> <silent> ,c :GhcModTypeClear<cr>
-" TeX
-let g:livepreview_previewer = 'zathura'
-au FileType tex,latex noremap <buffer> ,p :LLPStartPreview<cr>
 " elixir
 let g:alchemist_tag_disable = 1
 let g:mix_format_on_save = 1

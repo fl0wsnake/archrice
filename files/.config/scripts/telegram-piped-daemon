@@ -1,0 +1,19 @@
+#!/bin/bash
+
+pipe_in=/tmp/telegram_in.pipe
+pipe_out=/tmp/telegram_out.pipe
+
+if [[ ! -p $pipe_in ]]; then
+    mkfifo $pipe_in
+fi
+if [[ ! -p $pipe_out ]]; then
+    mkfifo $pipe_out
+fi
+
+# telegram-cli -W <$pipe_in >$pipe_out
+# cat $pipe_in | grep 1 >$pipe_out
+# while read msg; do echo $msg | grep 1 >$pipe_out; done <$pipe_in
+# while cat $pipe_in | while read msg; do echo $msg | grep 1 >$pipe_out; done
+cat $pipe_in | telegram-cli -W | while read msg; do
+    echo $msg >$pipe_out
+done

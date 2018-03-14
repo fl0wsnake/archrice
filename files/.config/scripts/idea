@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$(find ~/apps/idea-IU-173.4548.28/bin/ -name idea.sh)
