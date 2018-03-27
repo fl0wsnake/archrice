@@ -25,6 +25,7 @@ Plug 'arecarn/vim-selection'
 Plug 'arecarn/vim-crunch'
 Plug 'tpope/vim-endwise'
 Plug 'Yggdroot/indentLine'
+Plug 'michaeljsmith/vim-indent-object'
 " javascript
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'pangloss/vim-javascript'
@@ -55,7 +56,8 @@ Plug 'othree/xml.vim'
 " LaTeX
 Plug 'lervag/vimtex'
 " markdown
-Plug 'gabrielelana/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'suan/vim-instant-markdown'
 Plug 'dhruvasagar/vim-table-mode'
 " notes
@@ -365,6 +367,7 @@ noremap <silent> <leader>pt :NERDTreeFind<cr>
 let g:NERDTreeMapOpenRecursively = "go"
 let g:NERDTreeMapPreview = "O"
 " fzf
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 noremap <silent> <leader>ww :Windows!<cr>
 noremap <silent> <leader>pf :GFiles!<cr>
 noremap <silent> <leader>sf :call fzf#vim#ag_raw(". --hidden -U --ignore '.git*'", {'options': '--delimiter : --nth 4..'}, 1)<cr>
@@ -392,6 +395,10 @@ nmap <leader>d <plug>MoveMotionPlug
 xmap <leader>d <plug>MoveMotionXPlug
 nmap <leader>dd <plug>MoveMotionLinePlug
 nmap <leader>D <plug>MoveMotionEndOfLinePlug
+" somehow it did not work in scratch buffer
+nmap <silent> s <plug>SubstituteOverMotionMap
+nmap <silent> ss <plug>SubstituteLine
+nmap <silent> S s$
 vmap s S
 " vimwiki
 let g:vimwiki_path = '~/Dropbox/vimwiki'
@@ -399,9 +406,10 @@ let g:vimwiki_path_html = g:vimwiki_path . '/html'
 let g:vimwiki_template_path = g:vimwiki_path . '/templates'
 let g:vimwiki_template_ext = '.html'
 let g:vimwiki_syntax = 'markdown'
+let g:vimwiki_ext = '.md'
 let g:vjournal = {}
 let g:vjournal.path = g:vimwiki_path
-let g:vjournal.ext = '.md'
+let g:vjournal.ext = g:vimwiki_ext
 let g:vjournal.syntax = g:vimwiki_syntax
 let g:vjournal.path_html = g:vimwiki_path_html
 let g:vjournal.diary_rel_path = 'journal/'
@@ -411,7 +419,7 @@ let g:vjournal.template_path = g:vimwiki_template_path
 let g:vjournal.template_ext = g:vimwiki_template_ext
 let g:vdiary = {}
 let g:vdiary.path = g:vimwiki_path
-let g:vdiary.ext = '.md'
+let g:vdiary.ext = g:vimwiki_ext
 let g:vdiary.syntax = g:vimwiki_syntax
 let g:vdiary.path_html = g:vimwiki_path_html
 let g:vdiary.diary_rel_path = 'diary/'
@@ -426,7 +434,6 @@ nmap <silent> <leader>os <plug>VimwikiUISelect
 nmap <silent> <leader>oi <plug>VimwikiDiaryIndex
 function! VimwikiMakeDiaryNoteFixed(count)
     if a:count == 2
-        " setl spell
         set spell
     endif
     echo a:count
@@ -442,12 +449,6 @@ nmap <silent> <leader>oq <plug>VimwikiDeleteLink
 nmap <silent> <leader>ot :VimwikiTOC<cr>
 nmap <silent> <leader>on :exe "e" g:vimwiki_main.path . '/notes.md'<cr>
 " markdown
-
-let g:markdown_enable_conceal = 1
-let g:markdown_enable_mappings = 0
-let g:markdown_include_jekyll_support = 0
-let g:markdown_enable_input_abbreviations = 0
-
 " markdown preview
 au FileType markdown,vimwiki noremap <silent> ,p :InstantMarkdownPreview<cr>
 let g:instant_markdown_autostart = 0

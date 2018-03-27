@@ -4,7 +4,7 @@
 # * utilities:
 # texlive-langcyrillic xdotool rxvt-unicode-256xresources urxvt-perls urxvt-resize-font-git xorg-xev xorg-xmodmap unclutter-xfixes-git xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight udiskie light networkmanager network-manager-applet xorg-xset perl-anyevent-i3 termite rlwrap aspell zsh screenfetch-git pandoc atools inotify-tools peek-git
 # * apps
-# neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler mupdf texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cli-visualizer clyrics qutebrowser cmus wine winetricks sc-im-git
+# telegram-desktop-bin neovim ranger skypeforlinux-bin gpmdp zathura zathura-pdf-poppler mupdf texlive-most pianobar mpv transmission-cli spotify htop-vim-solarized-git translate-shell mpsyt artha xorg-xprop gcolor2 jq-git scrot cli-visualizer clyrics qutebrowser cmus wine winetricks sc-im-git
 # * ~/.config/scripts must be in $PATH
 
 set $i3dir ~/.config/i3/
@@ -21,9 +21,11 @@ focus_follows_mouse no
 # use Mouse+$leader to drag floating windows to their wanted position
 floating_modifier $leader
 # system mode
-set $mode_system Touchpad, (c)reload, (C)restart, Lock, Exit, Shutdown, Reboot, (e)logout, (S)suspend, Hibernate
+set $mode_system Touchpad, (c)reload, (C)restart, Lock, Exit, Shutdown, Reboot, (d)close all windows, (e)logout, (S)suspend, Hibernate
 mode "$mode_system" {
+    bindsym d [class=".*"] kill
     bindsym t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
+    bindsym p exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
     bindsym c reload
     bindsym Shift+c restart
     bindsym l exec --no-startup-id i3lock-fancy, mode "default"
@@ -31,7 +33,8 @@ mode "$mode_system" {
     bindsym Shift+s exec --no-startup-id systemctl suspend, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r [class=".*"] kill, exec systemctl reboot, mode "default"
-    bindsym s [class=".*"] kill, exec systemctl poweroff, mode "default"
+    bindsym s exec --no-startup-id i3-msg '[class=".*"] kill' && systemctl poweroff, mode "default"
+    # bindsym s [class=".*"] kill, exec systemctl poweroff, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -42,10 +45,10 @@ bindsym $leader+Shift+Return exec $term -d $(xcwd)
 bindsym $leader+z exec $term -d $(xcwd) -e "${EDITOR:=$VISUAL}"
 bindsym $leader+Shift+z exec ${BROWSER:=chromium}
 bindsym $leader+x exec $term -e "ranger $(xcwd)"
-bindsym $leader+Shift+p exec $term -e htop, mode "default"
+bindsym $leader+Shift+p exec $term -e htop
 # kill focused window
 bindsym $leader+d kill
-bindsym $leader+Shift+d [class=".*"] kill
+# bindsym $leader+Shift+d [class=".*"] kill
 # program launcher
 bindsym $leader+Shift+x exec rofi -show run
 # window finder
@@ -180,19 +183,16 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 # borders
-# hide_edge_borders smart
-# hide_edge_borders both
-# hide_edge_borders none
-new_window none
-new_float none
+hide_edge_borders smart
+default_border pixel 3
+default_floating_border pixel 3
 # gaps
 smart_gaps on
-exec_always i3-msg gaps inner all set 2
 # colors
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #ffffff   #d97d19
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.unfocused        #333333 #222222 #888888 #292d2e   #999999
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
@@ -205,7 +205,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id $i3dir/touchpad_disable
 exec --no-startup-id wallp
 exec --no-startup-id unclutter --timeout 1
-exec --no-startup-id compton -c
+exec --no-startup-id compton
 exec --no-startup-id udiskie
 exec --no-startup-id transmission-daemon
 
