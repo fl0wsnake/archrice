@@ -4,16 +4,16 @@ source ./paths.sh
 rm -rf $backupdir
 
 for i in "${paths[@]}"
-    do
-dir=$(dirname $i)
+do
+    dir=$(dirname $i)
     mkdir -p $backupdir/$dir
     cp -r ~/$i $backupdir/$dir
-    done
+done
 
-    find ./files \( -type f -o -type d \) -name '*history*' -exec rm -rf {} +
-    find ./files \( -type f -o -type d \) -name '*tagged*' -exec rm -rf {} +
-    find ./files \( -type f -o -type d \) -name '*cache*' -exec rm -rf {} +
+find ./files \( -type f -o -type d \) -name '*history*' -exec rm -rf {} +
+find ./files \( -type f -o -type d \) -name '*tagged*' -exec rm -rf {} +
+find ./files \( -type f -o -type d \) -name '*cache*' -exec rm -rf {} +
 
 # no ` and 0-9 bookmarks synced
-    ranger_bookmarks=./files/.config/ranger/bookmarks
-    grep '^[^0-9]' <"$ranger_bookmarks" | tail - -n +2> "$ranger_bookmarks.tmp" && mv "$ranger_bookmarks.tmp" "$ranger_bookmarks"
+ranger_bookmarks=./files/.config/ranger/bookmarks
+grep '^[^0-9]' <"$ranger_bookmarks" > "$ranger_bookmarks.tmp" && mv "$ranger_bookmarks.tmp" "$ranger_bookmarks"

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source ./places.sh
+source ./paths.sh
 
-for i in "${places[@]}"
+for i in "${paths[@]}"
 do
     cp -r $(realpath $backupdir/$i) ~/$(dirname $i)
 done
