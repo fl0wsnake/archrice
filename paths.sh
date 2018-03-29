@@ -9,7 +9,6 @@ declare -a paths=(
 ".config/termite"
 ".config/cava"
 ".config/scripts"
-".config/gtk-3.0"
 ".config/mps-youtube"
 ".config/qutebrowser"
 

@@ -93,6 +93,9 @@ set clipboard=unnamedplus
 set noshowmode
 set hidden
 syntax on
+set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
+set t_8b=^[[48;2;%lu;%lu;%lum        " set background color
+set t_Co=256
 colorscheme gruvbox
 set background=dark
 set number
@@ -103,8 +106,12 @@ set autoread
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-" for termite
+" for termite/st
 set termguicolors
+" different cursors for different modes for VTE compatible terminals (urxvt, st, xterm, gnome-terminal 3.x and others) 
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 
 " some functions
 function! ScratchBuffer()
@@ -277,7 +284,7 @@ au BufEnter * silent! set formatoptions-=cro
 " transparency
 hi Normal guibg=NONE ctermbg=NONE
 " content if no arguments are supplied
-au VimEnter * if argc() == 0 | call ScratchBuffer() | endif
+" au VimEnter * if argc() == 0 | call ScratchBuffer() | endif
 
 " modes
 function! ToggleVar(var, message)

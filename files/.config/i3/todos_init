@@ -5,6 +5,6 @@ WORKSPACENAME=$1
 LAYOUT=$2
 TERMINAL=$3
 
-todos="$TERMINAL -e \"nvim -c VimwikiIndex | :set buftype=\""
+todos="$TERMINAL -e nvim -c VimwikiIndex"
 
 $I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$todos" "$todos"

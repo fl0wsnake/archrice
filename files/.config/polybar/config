@@ -40,8 +40,9 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 1
 
-font-0 = Monaco:pixelsize=11;3
-font-1 = FontAwesome:pixelsize=11;2
+font-0 = "Roboto:size=11;3"
+font-1 = "FontAwesome:pixelsize=11;2"
+font-2 = "DejaVu Sans:size=11;2"
 
 modules-left = i3
 modules-center = cmus
@@ -146,6 +147,7 @@ label-muted = %{F#005400}%{F-}
 
 [module/cpu]
 type = internal/cpu
+interval = 2
 format = <label><ramp-coreload>
 label = %percentage%
 ramp-coreload-0 = ▁
@@ -156,7 +158,6 @@ ramp-coreload-4 = ▅
 ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
-interval = 2
 format-prefix = %{F#ff771e}%{F-}
 
 [module/memory]
@@ -172,115 +173,3 @@ date = "%a %d %b"
 time = "%H:%M"
 format-prefix = %{F#e03997}%{F-}
 label = %date% %time%
-
-; [module/wireless]
-; type = internal/network
-; interface = wlp2s0
-; interval = 4.0
-; format-connected = 
-; format-disconnected = <label-disconnected>
-; label-disconnected = 
-; label-disconnected-foreground = ${colors.darkened-foreground}
-
-; [module/eth]
-; type = internal/network
-; interface = enp3s0
-; interval = 4.0
-; label-connected = 
-; label-disconnected = 
-; label-disconnected-foreground = ${colors.darkened-foreground}
-
-; [module/wireless]
-; type = internal/network
-; interface = wlp2s0
-; interval = 4.0
-; format-connected = <ramp-signal> <label-connected>
-; format-disconnected = <label-disconnected>
-; label-disconnected = 
-; label-disconnected-foreground = ${colors.darkened-foreground}
-; format-packetloss = <animation-packetloss> <label-connected>
-; label-connected = %essid% %downspeed%
-; ramp-signal-0 = 0
-; ramp-signal-1 = 1
-; ramp-signal-2 = 2
-; ramp-signal-3 = 3
-; ramp-signal-4 = 4
-; ramp-signal-5 = 5
-; animation-packetloss-0 = 
-; animation-packetloss-1 = 
-
-; [module/eth]
-; type = internal/network
-; interface = enp3s0
-; interval = 4.0
-; format-connected-prefix = 
-; label-connected = %linkspeed% %downspeed%
-; format-disconnected = <label-disconnected>
-; label-disconnected = 
-; label-disconnected-foreground = ${colors.darkened-foreground}
-
-; [module/mpd]
-; type = internal/mpd
-; format-online = <label-song> <label-time>
-; icon-prev = 
-; icon-stop = 
-; icon-play = 
-; icon-pause = 
-; icon-next = 
-; label-song =  %artist% - %title%
-; label-song-maxlen = 70
-; label-song-ellipsis = true
-
-; [module/xbacklight]
-; type = internal/xbacklight
-; format = <label> <bar>
-; label = BL
-; bar-width = 10
-; bar-indicator = |
-; bar-indicator-foreground = #ff
-; bar-indicator-font = 2
-; bar-fill = ─
-; bar-fill-font = 2
-; bar-fill-foreground = #9f78e1
-; bar-empty = ─
-; bar-empty-font = 2
-; bar-empty-foreground = ${colors.foreground-alt}
-
-; [module/backlight-acpi]
-; inherit = module/xbacklight
-; type = internal/backlight
-; card = intel_backlight
-
-; [module/temperature]
-; type = internal/temperature
-; thermal-zone = 0
-; warn-temperature = 60
-; format = <ramp> <label>
-; format-warn = <ramp> <label-warn>
-; label = %temperature%
-; label-warn = %temperature%
-; ramp-0 = 
-; ramp-1 = 
-; ramp-2 = 
-; ramp-3 = 
-; ramp-4 = 
-
-; [module/filesystem]
-; type = internal/fs
-; interval = 25
-; mount-0 = /
-; label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-; label-unmounted = %mountpoint% not mounted
-; label-unmounted-foreground = ${colors.foreground-alt}
-
-; [module/home]
-; type = internal/fs
-; interval = 25
-; mount-0 = /home
-; label-mounted = %{F#0a81f5}~%{F-}: %percentage_used%%
-; label-unmounted = %mountpoint% not mounted
-; label-unmounted-foreground = ${colors.foreground-alt}
-
-; [module/xwindow]
-; type = internal/xwindow
-; label = %title:0:30:...%

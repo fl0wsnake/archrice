@@ -5,7 +5,7 @@ WORKSPACENAME=$1
 LAYOUT=$2
 TERMINAL=$3
 
-nvim="$TERMINAL -e \"nvim -c ':setl spell'\""
+nvim="$TERMINAL -e nvim -c ':call ScratchBuffer() | setl spell'"
 # translate_shell="$TERMINAL -e 'repl trans en:ru'"
 # artha="artha"
 # google_translate="chromium --app=https://translate.google.com/#en/ru"

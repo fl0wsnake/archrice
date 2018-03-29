@@ -18,8 +18,8 @@
         "name": "",
         "percent": 0.333333333333333,
         "swallows": [{
-            "class": "^Termite$",
-            "instance": "^termite$",
+            "class": "^st-256color$",
+            "instance": "^st-256color$",
             "transient_for": "^$"
         }],
         "type": "con"
