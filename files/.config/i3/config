@@ -44,13 +44,8 @@ mode "$mode_system" {
 bindsym $leader+p mode "$mode_system"
 # terminal, explorer, editor and process manager shortcuts
 bindsym $leader+Return exec $term
-bindsym $leader+Shift+Return exec $term -e $shell -c "cd `xcwd` && $shell "
-# bindsym $leader+z exec $term -e nvim `xcwd`
-# bindsym $leader+z exec $term -e nvim `xcwd` -c 'call ScratchBuffer()'
-# bindsym $leader+z exec $term -e nvim -c "cd `xcwd` | call ScratchBuffer()"
+bindsym $leader+Shift+Return exec $term -e $shell -c "cd \\\"`xcwd`\\\" && $shell "
 bindsym $leader+z exec $term -e nvim -c "call ScratchBuffer() | cd `xcwd`"
-# bindsym $leader+z exec $term -e nvim -c 'call ScratchBuffer() | cd `xcwd`'
-# bindsym $leader+z exec $term -e nvim -c "cd `xcwd`"
 bindsym $leader+Shift+z exec ${BROWSER:=chromium}
 bindsym $leader+x exec $term -e ranger `xcwd`
 bindsym $leader+Shift+p exec $term -e htop

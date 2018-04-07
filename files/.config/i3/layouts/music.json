@@ -18,7 +18,7 @@
                "y": 0
             },
             "name": "~",
-            "percent": 0.3,
+            "percent": 0.2,
             "swallows": [
                {
                "class": "^visualizer$"
@@ -31,7 +31,7 @@
             "border": "pixel",
             "floating": "auto_off",
             "layout": "splith",
-            "percent": 0.7,
+            "percent": 0.8,
             "type": "con",
             "nodes": [
                 {
@@ -45,7 +45,7 @@
                        "y": 0
                     },
                     "name": "~",
-                    "percent": 0.2,
+                    "percent": 0.3,
                     "swallows": [
                        {
                "class": "^subs$"
@@ -58,7 +58,7 @@
                     "border": "pixel",
                     "floating": "auto_off",
                     "layout": "splith",
-                    "percent": 0.8,
+                    "percent": 0.7,
                     "type": "con",
                     "nodes": [
                         {

@@ -27,7 +27,8 @@ Plug 'tpope/vim-endwise'
 Plug 'Yggdroot/indentLine'
 Plug 'michaeljsmith/vim-indent-object'
 " javascript
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'editorconfig/editorconfig-vim'
+Plug 'maksimr/vim-jsbeautify'
 Plug 'pangloss/vim-javascript'
 " typescript
 Plug 'mhartington/nvim-typescript'
@@ -476,7 +477,12 @@ let g:indentLine_enabled = 0
 " languages
 au FileType javascript,vue setl softtabstop=2 shiftwidth=2
 " format
-au FileType javascript,sh au BufWritePre * :Autoformat
+au FileType sh au BufWritePre * :Autoformat
+au FileType javascript au BufWritePre * :call JsBeautify()<cr>
+au FileType json au BufWritePre * :call JsonBeautify()<cr>
+au FileType jsx au BufWritePre * :call JsxBeautify()<cr>
+au FileType html au BufWritePre * :call HtmlBeautify()<cr>
+au FileType css au BufWritePre * :call CSSBeautify()<cr>
 " ts
 let g:nvim_typescript#type_info_on_hold=1
 let g:nvim_typescript#signature_complete=1
