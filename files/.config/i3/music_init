@@ -5,9 +5,10 @@ WORKSPACENAME=$1
 LAYOUT=$2
 TERMINAL=$3
 
-visualizer="$TERMINAL -e vis"
-lyrics="sleep 0.4 && $TERMINAL -e nvim"
-pandora="sleep 0.8 && $TERMINAL -e pianobar"
+visualizer="$TERMINAL -c visualizer -e vis"
+lyrics="$TERMINAL -c subs -e nvim -c ':call ScratchBuffer() | setl spell'"
+pandora="$TERMINAL -c pianobar -e pianobar"
+focus="i3 '[class=\"pianobar\"]' focus"
 
 $I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$player" "$visualizer" "$pandora" "$lyrics" "$focus"
 

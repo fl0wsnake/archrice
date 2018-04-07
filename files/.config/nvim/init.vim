@@ -68,6 +68,8 @@ Plug 'slashmili/alchemist.vim'
 Plug 'mhinz/vim-mix-format'
 " api blueprint
 Plug 'kylef/apiblueprint.vim'
+" purescirpt
+Plug 'purescript-contrib/purescript-vim'
 call plug#end()
 
 " leaders
@@ -119,8 +121,9 @@ function! ScratchBuffer()
         b Scratch
     else
         enew
-        setl buftype=nofile
         silent file Scratch
+        setl buftype=nofile
+        nnoremap <buffer> <silent> <leader>pt :e .<cr>
     endif
 endfunction
 " keymaps
@@ -283,8 +286,6 @@ noremap <silent> <leader>ts :s#\C\(\<\u[a-z0-9]\+\\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2
 au BufEnter * silent! set formatoptions-=cro
 " transparency
 hi Normal guibg=NONE ctermbg=NONE
-" content if no arguments are supplied
-" au VimEnter * if argc() == 0 | call ScratchBuffer() | endif
 
 " modes
 function! ToggleVar(var, message)
@@ -366,11 +367,13 @@ let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline_section_a = airline#section#create([])
 let g:airline_section_z = airline#section#create([])
 " NERDTree
+let g:NERDTreeNotificationThreshold = 500
 let NERDTreeQuitOnOpen=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
 noremap <silent> <leader>ft :NERDTree<cr>
-noremap <silent> <leader>pt :NERDTreeFind<cr>
+" noremap <silent> <leader>pt :exe filereadable(expand('%')) ? 'NERDTreeFind' : 'NERDTree'<cr>
+noremap <silent> <leader>pt :exe filereadable(expand('%')) ? 'NERDTreeFind' : 'NERDTree'<cr>
 let g:NERDTreeMapOpenRecursively = "go"
 let g:NERDTreeMapPreview = "O"
 " fzf
@@ -468,7 +471,7 @@ vnoremap <silent> <leader>ac :,Crunch!<cr>
 vnoremap <silent> <leader>ae :Crunch<cr>
 " indentLine
 let g:indentLine_enabled = 0
-au FileType html,vue let g:indentLine_enabled = 1
+" au FileType html,vue let g:indentLine_enabled = 1
 
 " languages
 au FileType javascript,vue setl softtabstop=2 shiftwidth=2

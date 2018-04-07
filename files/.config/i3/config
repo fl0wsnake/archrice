@@ -2,9 +2,9 @@
 # * interface:
 # xcwd-git rofi i3lock-fancy-git feh compton-git polybar perl-anyevent-i3 ttf-font-awesome ttf-font-awesome-4
 # * utilities:
-# neovim tmux ranger w3m pip xclip uunclutter-xfixes-git diskie light perl-anyevent-i3 termite aspell zsh screenfetch-git pandoc atool inotify-tools peek jq-git
+# unoconv zathura mupdf the_silver_searcher neovim tmux ranger w3m pip xclip uunclutter-xfixes-git udiskie light perl-anyevent-i3 termite aspell zsh pandoc atool inotify-tools peek jq-git
 # * apps
-# vscode telegram-desktop-bin zathura zathura-pdf-poppler mupdf texlive-most pianobar mpv transmission-cli htop-vim-git translate-shell mpsyt artha scrot cli-visualizer clyrics cmus
+# bomi vscode telegram-desktop-bin zathura zathura-pdf-poppler texlive-most pianobar mpv transmission-cli htop-vim-git translate-shell mpsyt artha scrot cli-visualizer clyrics cmus
 # * some junk
 # xorg-xprop xorg-xrdb xorg-xinit xorg-xinput xorg-xbacklight networkmanager network-manager-applet rlwrap urxvt-resize-font-git texlive-langcyrillic xdotool rxvt-unicode-256xresources urxvt-perls xorg-xev xorg-xmodmap xorg-xset spotify 
 # * ~/.config/scripts must be in $PATH
@@ -45,7 +45,12 @@ bindsym $leader+p mode "$mode_system"
 # terminal, explorer, editor and process manager shortcuts
 bindsym $leader+Return exec $term
 bindsym $leader+Shift+Return exec $term -e $shell -c "cd `xcwd` && $shell "
-bindsym $leader+z exec $term -e nvim `xcwd`
+# bindsym $leader+z exec $term -e nvim `xcwd`
+# bindsym $leader+z exec $term -e nvim `xcwd` -c 'call ScratchBuffer()'
+# bindsym $leader+z exec $term -e nvim -c "cd `xcwd` | call ScratchBuffer()"
+bindsym $leader+z exec $term -e nvim -c "call ScratchBuffer() | cd `xcwd`"
+# bindsym $leader+z exec $term -e nvim -c 'call ScratchBuffer() | cd `xcwd`'
+# bindsym $leader+z exec $term -e nvim -c "cd `xcwd`"
 bindsym $leader+Shift+z exec ${BROWSER:=chromium}
 bindsym $leader+x exec $term -e ranger `xcwd`
 bindsym $leader+Shift+p exec $term -e htop
@@ -211,7 +216,6 @@ exec --no-startup-id unclutter --timeout 1
 exec --no-startup-id compton
 exec --no-startup-id udiskie
 exec --no-startup-id transmission-daemon
-
 exec --no-startup-id dropboxd
 
 exec i3-msg workspace $1_workspace

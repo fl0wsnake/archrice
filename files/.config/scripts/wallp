@@ -9,4 +9,4 @@ if [[ !$# -eq 0 ]]; then
     wall_path="$wall_filename.$new_wall_ext"
     cp "$new_wall_path" "$wall_path"
 fi
-feh --bg-scale "$wall_path"
+feh --bg-fill "$wall_path"
