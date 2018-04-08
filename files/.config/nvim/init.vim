@@ -56,13 +56,11 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'othree/xml.vim'
 " LaTeX
 Plug 'lervag/vimtex'
+" notes
+Plug 'vimwiki/vimwiki'
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'suan/vim-instant-markdown'
-Plug 'dhruvasagar/vim-table-mode'
-" notes
-Plug 'vimwiki/vimwiki'
 " elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
@@ -77,6 +75,8 @@ call plug#end()
 let mapleader="\<Space>"
 let maplocalleader=","
 " sets
+filetype plugin on
+syntax on
 set mouse=a
 set timeoutlen=1500
 set linebreak
@@ -95,7 +95,6 @@ set helpheight=99999
 set clipboard=unnamedplus
 set noshowmode
 set hidden
-syntax on
 set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
 set t_8b=^[[48;2;%lu;%lu;%lum        " set background color
 set t_Co=256
@@ -411,7 +410,9 @@ nmap <silent> s <plug>SubstituteOverMotionMap
 nmap <silent> ss <plug>SubstituteLine
 nmap <silent> S s$
 vmap s S
+
 " vimwiki
+let g:vimwiki_global_ext = 0
 let g:vimwiki_path = '~/Dropbox/vimwiki'
 let g:vimwiki_path_html = g:vimwiki_path . '/html'
 let g:vimwiki_template_path = g:vimwiki_path . '/templates'
@@ -460,11 +461,9 @@ nmap <silent> <leader>oq <plug>VimwikiDeleteLink
 nmap <silent> <leader>ot :VimwikiTOC<cr>
 nmap <silent> <leader>on :exe "e" g:vimwiki_main.path . '/notes.md'<cr>
 " markdown
-" markdown preview
-au FileType markdown,vimwiki noremap <silent> ,p :InstantMarkdownPreview<cr>
-let g:instant_markdown_autostart = 0
-let g:instant_markdown_slow = 1
-let g:instant_markdown_open_to_the_world = 1
+set conceallevel=2
+let g:vim_markdown_folding_disabled = 1
+
 " calculator
 nnoremap <silent> <leader>ac :,Crunch!<cr>
 nnoremap <silent> <leader>ae :,Crunch<cr>
