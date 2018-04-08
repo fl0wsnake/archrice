@@ -115,33 +115,43 @@ bindsym $leader+Shift+v move container to workspace $translator_workspace
 set $1_workspace 201:1
 bindsym $leader+1 workspace $1_workspace
 bindsym $leader+Shift+1 move container to workspace $1_workspace
+bindsym $leader+Control+Shift+1 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $1_workspace
 set $2_workspace 202:2
 bindsym $leader+2 workspace $2_workspace
 bindsym $leader+Shift+2 move container to workspace $2_workspace
+bindsym $leader+Control+Shift+2 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $2_workspace
 set $3_workspace 203:3
 bindsym $leader+3 workspace $3_workspace
 bindsym $leader+Shift+3 move container to workspace $3_workspace
+bindsym $leader+Control+Shift+3 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $3_workspace
 set $4_workspace 204:4
 bindsym $leader+4 workspace $4_workspace
 bindsym $leader+Shift+4 move container to workspace $4_workspace
+bindsym $leader+Control+Shift+4 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $4_workspace
 set $5_workspace 205:5
 bindsym $leader+5 workspace $5_workspace
 bindsym $leader+Shift+5 move container to workspace $5_workspace
+bindsym $leader+Control+Shift+5 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $5_workspace
 set $6_workspace 206:6
 bindsym $leader+6 workspace $6_workspace
 bindsym $leader+Shift+6 move container to workspace $6_workspace
+bindsym $leader+Control+Shift+6 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $6_workspace
 set $7_workspace 207:7
 bindsym $leader+7 workspace $7_workspace
 bindsym $leader+Shift+7 move container to workspace $7_workspace
+bindsym $leader+Control+Shift+7 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $7_workspace
 set $8_workspace 208:8
 bindsym $leader+8 workspace $8_workspace
 bindsym $leader+Shift+8 move container to workspace $8_workspace
+bindsym $leader+Control+Shift+8 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $8_workspace
 set $9_workspace 209:9
 bindsym $leader+9 workspace $9_workspace
 bindsym $leader+Shift+9 move container to workspace $9_workspace
+bindsym $leader+Control+Shift+9 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $9_workspace
 set $0_workspace 210:0
 bindsym $leader+0 workspace $0_workspace
 bindsym $leader+Shift+0 move container to workspace $0_workspace
+bindsym $leader+Control+Shift+0 exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $0_workspace
 # cycle workspaces
 # bindsym Mod1+Tab workspace next
 # bindsym Mod1+Shift+Tab workspace prev
