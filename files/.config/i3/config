@@ -84,33 +84,43 @@ bindsym $leader+space focus mode_toggle
 set $q_workspace 151:Q
 bindsym $leader+q workspace $q_workspace
 bindsym $leader+Shift+q move container to workspace $q_workspace
+bindsym $leader+Control+Shift+q exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $q_workspace
 set $w_workspace 152:W
 bindsym $leader+w workspace $w_workspace
 bindsym $leader+Shift+w move container to workspace $w_workspace
+bindsym $leader+Control+Shift+w exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $w_workspace
 set $e_workspace 153:E
 bindsym $leader+e workspace $e_workspace
 bindsym $leader+Shift+e move container to workspace $e_workspace
+bindsym $leader+Control+Shift+e exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $e_workspace
 set $r_workspace 154:R
 bindsym $leader+r workspace $r_workspace
 bindsym $leader+Shift+r move container to workspace $r_workspace
+bindsym $leader+Control+Shift+r exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $r_workspace
 set $t_workspace 155:T
 bindsym $leader+t workspace $t_workspace
 bindsym $leader+Shift+t move container to workspace $t_workspace
+bindsym $leader+Control+Shift+t exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $t_workspace
 set $todos_workspace 100:
 bindsym $leader+a exec --no-startup-id $i3dir/todos_init $todos_workspace todos $term
 bindsym $leader+Shift+a move container to workspace $todos_workspace
+bindsym $leader+Control+Shift+a exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $todos_workspace
 set $browser_workspace 102:
 bindsym $leader+s exec --no-startup-id $i3dir/init_layout $browser_workspace browser chromium
 bindsym $leader+Shift+s move container to workspace $browser_workspace
+bindsym $leader+Control+Shift+s exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $browser_workspace
 set $chat_workspace 103:
 bindsym $leader+c exec --no-startup-id $i3dir/init_layout $chat_workspace chats telegram-desktop
 bindsym $leader+Shift+c move container to workspace $chat_workspace
+bindsym $leader+Control+Shift+c exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $chat_workspace
 set $music_workspace 104:♫
 bindsym $leader+g exec --no-startup-id $i3dir/music_init $music_workspace music $term
 bindsym $leader+Shift+g move container to workspace $music_workspace
+bindsym $leader+Control+Shift+g exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $music_workspace
 set $translator_workspace 101:
 bindsym $leader+v exec --no-startup-id $i3dir/translators_init $translator_workspace translators $term
 bindsym $leader+Shift+v move container to workspace $translator_workspace
+bindsym $leader+Control+Shift+v exec i3-msg rename workspace `$i3dir/get_current_workspace_name` to $translator_workspace
 # numeric workspaces
 set $1_workspace 201:1
 bindsym $leader+1 workspace $1_workspace

@@ -28,7 +28,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'michaeljsmith/vim-indent-object'
 " javascript
 Plug 'editorconfig/editorconfig-vim'
-Plug 'maksimr/vim-jsbeautify'
 Plug 'pangloss/vim-javascript'
 " typescript
 Plug 'mhartington/nvim-typescript'
@@ -316,10 +315,6 @@ set spellcapcheck=
 set spelllang=en
 au FileType text setl spell
 nnoremap <silent> <leader>mc :call ToggleVar(&spell, 'spellchecker')<cr>:set spell!<cr>
-" strip trailing whitespaces mode
-let stripTrailingWhitespacesMode = 1
-nnoremap <silent> <leader>mw :let stripTrailingWhitespacesMode=ToggleVar(stripTrailingWhitespacesMode, 'strip trailing whitespaces')<cr>
-au BufWritePre * silent! exe stripTrailingWhitespacesMode?'%s/\s\+$//e':''
 " show interface mode
 let showInterfaceMode = 1
 function! ToggleInterface(if_show)
@@ -474,15 +469,12 @@ let g:indentLine_enabled = 0
 " au FileType html,vue let g:indentLine_enabled = 1
 
 " languages
+au BufWritePre * :Autoformat
+" javascript
+let g:formatters_javascript = ['prettier_javascript', 'jsbeautify_javascript', 'eslint_local', 'jscs', 'standard_javascript', 'xo_javascript']
+let g:formatdef_prettier_javascript = '"prettier --no-semi"'
 au FileType javascript,vue setl softtabstop=2 shiftwidth=2
-" format
-au FileType sh au BufWritePre * :Autoformat
-au FileType javascript au BufWritePre * :call JsBeautify()<cr>
-au FileType json au BufWritePre * :call JsonBeautify()<cr>
-au FileType jsx au BufWritePre * :call JsxBeautify()<cr>
-au FileType html au BufWritePre * :call HtmlBeautify()<cr>
-au FileType css au BufWritePre * :call CSSBeautify()<cr>
-" ts
+" typescript
 let g:nvim_typescript#type_info_on_hold=1
 let g:nvim_typescript#signature_complete=1
 au FileType typescript noremap <buffer> K :TSDoc<cr>

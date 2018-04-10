@@ -59,6 +59,8 @@ telegram-desktop-bin
 nodejs
 ### package managers
 pip-xfixes-git
+### other tools
+prettier
 
 ## apps
 ### music
