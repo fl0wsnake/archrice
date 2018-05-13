@@ -7,7 +7,8 @@
     "percent": null,
     "type": "con",
     "nodes": [{
-        "border": "none",
+        "border": "pixel",
+        "current_border_width": 3,
         "floating": "auto_off",
         "geometry": {
             "height": 550,

@@ -38,11 +38,11 @@ xcwd-git tmux xclip zsh
 ### editor
 the_silver_searcher
 ### file system
-atool inotify-tools
+atool inotify-tools watchexec
 ### com/transpilers
 pandoc unoconv texlive-most texlive-langcyrillic python-grip-git
 ### internet
-gnu-netcat rlwrap
+gnu-netcat rlwrap quickserve
 
 ## media
 ### pdf
@@ -55,6 +55,10 @@ vscode
 telegram-desktop-bin
 
 ## programming
+### environments
+rustup
+### js
+nodejs-ts-node nodejs-nodemon nodejs-serverless
 ### runtimes
 nodejs
 ### package managers

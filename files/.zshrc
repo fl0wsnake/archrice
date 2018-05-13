@@ -59,6 +59,7 @@ npm
 git
 docker
 sudo
+git-open
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -98,6 +99,7 @@ alias bins='ls -t /usr/bin | head -n 16'
 alias watchtime='while true; do echo -ne "$(date +%H:%M:%S:%2N)\r"; done'
 alias screen='import ~/stuff/images/screenshots/$(date +%Y-%m-%d-%T)-screenshot.png'
 alias fixcaps='xdotool key Caps_Lock'
+alias screen='tsnodemon -x "ts-node"'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -119,3 +121,10 @@ if [ -s "$NVM_SCRIPT_DIR/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]
   }
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/kirill/.cache/aurman/nodejs-serverless/pkg/nodejs-serverless/usr/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/kirill/.cache/aurman/nodejs-serverless/pkg/nodejs-serverless/usr/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/kirill/.cache/aurman/nodejs-serverless/pkg/nodejs-serverless/usr/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/kirill/.cache/aurman/nodejs-serverless/pkg/nodejs-serverless/usr/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

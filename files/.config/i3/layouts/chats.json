@@ -1,23 +1,19 @@
 // vim:ts=4:sw=4:et
 {
-    "border": "none",
+    "border": "pixel",
+    "current_border_width": 3,
     "floating": "auto_off",
     "geometry": {
-       "height": 745,
-       "width": 1362,
-       "x": 2,
-       "y": 2
+        "height": 745,
+        "width": 1362,
+        "x": 2,
+        "y": 2
     },
     "name": "Telegram",
     "percent": 1,
-    "swallows": [
-       {
-       "class": "^TelegramDesktop$",
-       "instance": "^telegram\\-desktop$",
-       "title": "^Telegram$",
-       "transient_for": "^$"
-       }
-    ],
+    "swallows": [{
+        "class": "^TelegramDesktop$",
+        "transient_for": "^$"
+    }],
     "type": "con"
 }
-

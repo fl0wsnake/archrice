@@ -6,24 +6,21 @@
     "layout": "splitv",
     "percent": 1,
     "type": "con",
-    "nodes": [
-        {
+    "nodes": [{
             "border": "pixel",
             "current_border_width": 3,
             "floating": "auto_off",
             "geometry": {
-               "height": 360,
-               "width": 560,
-               "x": 0,
-               "y": 0
+                "height": 360,
+                "width": 560,
+                "x": 0,
+                "y": 0
             },
             "name": "~",
             "percent": 0.2,
-            "swallows": [
-               {
-               "class": "^visualizer$"
-               }
-            ],
+            "swallows": [{
+                "class": "^visualizer$"
+            }],
             "type": "con"
         },
         {
@@ -33,24 +30,21 @@
             "layout": "splith",
             "percent": 0.8,
             "type": "con",
-            "nodes": [
-                {
+            "nodes": [{
                     "border": "pixel",
                     "current_border_width": 3,
                     "floating": "auto_off",
                     "geometry": {
-                       "height": 360,
-                       "width": 560,
-                       "x": 0,
-                       "y": 0
+                        "height": 360,
+                        "width": 560,
+                        "x": 0,
+                        "y": 0
                     },
                     "name": "~",
                     "percent": 0.3,
-                    "swallows": [
-                       {
-               "class": "^subs$"
-                       }
-                    ],
+                    "swallows": [{
+                        "class": "^subs$"
+                    }],
                     "type": "con"
                 },
                 {
@@ -60,37 +54,31 @@
                     "layout": "splith",
                     "percent": 0.7,
                     "type": "con",
-                    "nodes": [
-                        {
-                            // tabbed split container with 2 children
+                    "nodes": [{
+                        // tabbed split container with 2 children
+                        "border": "pixel",
+                        "floating": "auto_off",
+                        "layout": "tabbed",
+                        "percent": 1,
+                        "type": "con",
+                        "nodes": [{
                             "border": "pixel",
+                            "current_border_width": 3,
                             "floating": "auto_off",
-                            "layout": "tabbed",
-                            "percent": 1,
-                            "type": "con",
-                            "nodes": [
-                                {
-                                    "border": "pixel",
-                                    "current_border_width": 3,
-                                    "floating": "auto_off",
-                                    "geometry": {
-                                       "height": 360,
-                                       "width": 560,
-                                       "x": 0,
-                                       "y": 0
-                                    },
-                                    "name": "i3-save-tree",
-                                    "percent": 0.5,
-                                    "swallows": [
-                                       {
-                                       "class": "^pianobar$"
-                                       }
-                                    ],
-                                    "type": "con"
-                                }
-                            ]
-                        }
-                    ]
+                            "geometry": {
+                                "height": 360,
+                                "width": 560,
+                                "x": 0,
+                                "y": 0
+                            },
+                            "name": "i3-save-tree",
+                            "percent": 0.5,
+                            "swallows": [{
+                                "class": "^pianobar$"
+                            }],
+                            "type": "con"
+                        }]
+                    }]
                 }
             ]
         }

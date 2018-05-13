@@ -68,6 +68,9 @@ Plug 'mhinz/vim-mix-format'
 Plug 'kylef/apiblueprint.vim'
 " purescirpt
 Plug 'purescript-contrib/purescript-vim'
+" rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 call plug#end()
 
 " leaders
@@ -76,6 +79,7 @@ let maplocalleader=","
 " sets
 filetype plugin on
 syntax on
+set breakindent
 set mouse=a
 set timeoutlen=1500
 set linebreak
@@ -105,11 +109,11 @@ set scrolloff=3
 set autoread
 " indentation
 set expandtab
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 " for termite/st
 set termguicolors
-" different cursors for different modes for VTE compatible terminals (urxvt, st, xterm, gnome-terminal 3.x and others) 
+" different cursors for different modes for VTE compatible terminals (urxvt, st, xterm, gnome-terminal 3.x and others)
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
@@ -227,13 +231,18 @@ endfunction
 let g:trans_dir = "~/apps/trans/"
 function! Trans()
     exe system("mkdir -p " . g:trans_dir)
-    let l:word = tolower(expand("<cword>"))
-    let l:word_path = g:trans_dir . l:word . ".txt"
-    if !filereadable(expand(l:word_path))
-        if system("command -v trans") == ''
-            echo("No trans executeble found.")
-        else
-            exe system("trans -no-ansi en: " . l:word . ">" . l:word_path)
+    let l:caption = expand("<cword>")
+    if l:caption == ''
+        let l:word_path = g:trans_dir . "index.md"
+    else
+        let l:word = tolower(l:caption)
+        let l:word_path = g:trans_dir . l:word . ".txt"
+        if !filereadable(expand(l:word_path))
+            if system("command -v trans") == ''
+                echo("No trans executeble found.")
+            else
+                exe system("trans -no-ansi en: " . l:word . ">" . l:word_path)
+            endif
         endif
     endif
     exe "e" fnameescape(l:word_path)
@@ -245,13 +254,18 @@ noremap <silent> <leader>aD :tab sb<cr>:call Trans()<cr>
 let g:lyrics_dir = "~/apps/lyrics/"
 function! Lyrics()
     exe system("mkdir -p " . g:lyrics_dir)
-    let l:song_name = substitute(tolower(getline('.')), " ", "_", "g")
-    let l:song_path = g:lyrics_dir . l:song_name . ".txt"
-    if !filereadable(expand(l:song_path))
-        if system("command -v clyrics") == ''
-            echo("No clyrics executeble found.")
-        else
-            exe system("clyrics " . l:song_name . ">" . l:song_path)
+    let l:caption = getline('.')
+    if l:caption == ''
+        let l:song_path = g:lyrics_dir . "index.md"
+    else
+        let l:song_name = substitute(tolower(l:caption), " ", "_", "g")
+        let l:song_path = g:lyrics_dir . l:song_name . ".txt"
+        if !filereadable(expand(l:song_path))
+            if system("command -v clyrics") == ''
+                echo("No clyrics executeble found.")
+            else
+                exe system("clyrics " . l:song_name . ">" . l:song_path)
+            endif
         endif
     endif
     exe "e" fnameescape(l:song_path)
@@ -350,8 +364,8 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_silent_chdir = 1
 " deoplete
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#set('around', 'rank', 20)
-call deoplete#custom#set('buffer', 'rank', 32)
+call deoplete#custom#source('around', 'rank', 20)
+call deoplete#custom#source('buffer', 'rank', 32)
 au FileType markdown,tex,vimwiki,text let b:deoplete_disable_auto_complete = 1
 " airline
 let g:airline#extensions#tabline#enabled = 1
@@ -472,11 +486,12 @@ let g:indentLine_enabled = 0
 au BufWritePre * :Autoformat
 " javascript
 let g:formatters_javascript = ['prettier_javascript', 'jsbeautify_javascript', 'eslint_local', 'jscs', 'standard_javascript', 'xo_javascript']
+let g:formatters_typescript = ['prettier_javascript', 'tsfmt']
+let g:formatters_json = ['prettier_javascript', 'jsbeautify_json', 'fixjson']
 let g:formatdef_prettier_javascript = '"prettier --no-semi"'
 au FileType javascript,vue setl softtabstop=2 shiftwidth=2
 " typescript
 let g:nvim_typescript#type_info_on_hold=1
-let g:nvim_typescript#signature_complete=1
 au FileType typescript noremap <buffer> K :TSDoc<cr>
 au FileType typescript noremap <buffer> <M-cr> :TSImport<cr>
 au FileType typescript noremap <buffer> <C-b> :TSDef<cr>
@@ -493,3 +508,9 @@ au FileType haskell nnoremap <buffer> <silent> ,c :GhcModTypeClear<cr>
 " elixir
 let g:alchemist_tag_disable = 1
 let g:mix_format_on_save = 1
+" rust
+let g:racer_experimental_completer = 1
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)

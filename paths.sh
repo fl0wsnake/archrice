@@ -25,6 +25,7 @@ declare -a paths=(
 ".xprofile"
 ".latexmkrc"
 ".oh-my-zsh/themes/my.zsh-theme"
+".oh-my-zsh/custom"
 
 ".config/nvim/autoload"
 ".config/nvim/UltiSnips"

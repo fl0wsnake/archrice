@@ -1,23 +1,21 @@
 // vim:ts=4:sw=4:et
 {
-    "border": "none",
+    "border": "pixel",
+    "current_border_width": 3,
     "floating": "auto_off",
     "geometry": {
-       "height": 767,
-       "width": 1365,
-       "x": 0,
-       "y": 0
+        "height": 767,
+        "width": 1365,
+        "x": 0,
+        "y": 0
     },
     "name": "i3: Layout saving in i3 - Chromium",
     "percent": 1,
-    "swallows": [
-       {
-       "class": "^Chromium$",
-       "instance": "^chromium$",
-       "transient_for": "^$",
-       "window_role": "^browser$"
-       }
-    ],
+    "swallows": [{
+        "class": "^Chromium$",
+        "instance": "^chromium$",
+        "transient_for": "^$",
+        "window_role": "^browser$"
+    }],
     "type": "con"
 }
-
