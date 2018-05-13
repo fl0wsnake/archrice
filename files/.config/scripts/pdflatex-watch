@@ -9,7 +9,7 @@ the_command="pdflatex $args -interaction nonstopmode -file-line-error -output-di
 echo $the_command
 eval $the_command
 
-inotifywait -m -e modify --exclude "^$outputdir/.*$" --format %f . | while read f;
+inotifywait -m -e modify --include "^.*\.tex$" --format %f . | while read f;
 do
   echo $f modified
   echo $the_command
