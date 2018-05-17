@@ -11,6 +11,7 @@ declare -a paths=(
 ".config/scripts"
 ".config/mps-youtube"
 ".config/qutebrowser"
+".config/zathura"
 
 ".config/vis/config"
 ".config/xylosper/bomi/pref.json"
