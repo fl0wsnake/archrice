@@ -15,7 +15,7 @@ floating_modifier $leader
 # system mode
 set $mode_system Touchpad, (c)reload, (C)restart, Lock, Exit, Shutdown, Reboot, (d)close all windows, (e)logout, (S)suspend, Hibernate
 mode "$mode_system" {
-    bindsym d [class=".*"] kill
+  bindsym d [class=".*"] kill
     bindsym t exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
     bindsym p exec --no-startup-id $i3dir/touchpad_toggle, mode "default"
     bindsym c reload
@@ -26,23 +26,26 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r [class=".*"] kill, exec systemctl reboot, mode "default"
     bindsym s exec --no-startup-id i3-msg '[class=".*"] kill' && systemctl poweroff, mode "default"
-    # bindsym s [class=".*"] kill, exec systemctl poweroff, mode "default"
+# bindsym s [class=".*"] kill, exec systemctl poweroff, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $leader+p mode "$mode_system"
-# terminal, explorer, editor and process manager shortcuts
-bindsym $leader+Return exec --no-startup-id $term
-bindsym $leader+Shift+Return exec --no-startup-id $term -e $shell -c "cd \\\"`xcwd`\\\" && $shell "
+# terminal
+bindsym $leader+Return exec --no-startup-id $term -e $shell -c "cd \\\"`xcwd`\\\" && $shell "
+# program launcher
+bindsym $leader+Shift+Return exec --no-startup-id rofi -show run
+# text editor
 bindsym $leader+z exec --no-startup-id $term -e nvim -c "call ScratchBuffer() | cd `xcwd`"
-bindsym $leader+Shift+z exec --no-startup-id ${BROWSER:=chromium}
-bindsym $leader+x exec --no-startup-id $term -e ranger `xcwd`
+# file explorer
+bindsym $leader+x exec --no-startup-id $term -e ranger "`xcwd`"
+# browser
+bindsym $leader+Shift+x exec --no-startup-id ${BROWSER:=chromium}
+# process manager
 bindsym $leader+Shift+p exec --no-startup-id $term -e htop
 # kill focused window
 bindsym $leader+d kill
 # bindsym $leader+Shift+d [class=".*"] kill
-# program launcher
-bindsym $leader+Shift+x exec --no-startup-id rofi -show run
 # window finder
 bindsym $leader+Shift+o exec --no-startup-id rofi -show window
 # change focus
@@ -221,5 +224,6 @@ exec --no-startup-id compton
 exec --no-startup-id udiskie
 exec --no-startup-id transmission-daemon
 exec --no-startup-id dropboxd
+# exec --no-startup-id sudo dockerd
 
 exec i3-msg workspace $1_workspace

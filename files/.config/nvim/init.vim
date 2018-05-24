@@ -120,14 +120,14 @@ let &t_EI = "\<Esc>[2 q"
 
 " some functions
 function! ScratchBuffer()
-    if bufexists('Scratch')
-        b Scratch
-    else
-        enew
-        silent file Scratch
-        setl buftype=nofile
-        nnoremap <buffer> <silent> <leader>pt :e .<cr>
-    endif
+  if bufexists('Scratch')
+    b Scratch
+  else
+    enew
+    silent file Scratch
+    setl buftype=nofile
+    nnoremap <buffer> <silent> <leader>pt :e .<cr>
+  endif
 endfunction
 " keymaps
 nnoremap <silent> <C-c> :Commentary<cr>j
@@ -168,10 +168,10 @@ noremap <silent> <leader>vp :so $MYVIMRC<cr>:PlugInstall<cr>
 noremap <silent> <leader>vu :PlugUpdate<cr>
 noremap <silent> <leader>fD :call DeleteFileAndBuffer()<cr>
 function! DeleteFileAndBuffer()
-    if confirm('Delete this buffer and file?', "&Yes\n&No", 0) == 1
-        call delete(expand('%'))
-        bdelete!
-    endif
+  if confirm('Delete this buffer and file?', "&Yes\n&No", 0) == 1
+    call delete(expand('%'))
+    bdelete!
+  endif
 endfunction
 noremap <silent> <leader>fd :call delete(expand('%'))<cr>:set modified<cr>
 noremap <silent> <leader>fm :Rename<space>
@@ -196,11 +196,11 @@ noremap <silent> <leader>hc :Commands<cr>
 noremap <silent> <leader><tab> :b#<cr>
 noremap Y y$
 for i in range(1, 9)
-    " <leader>{n} for window switching
-    execute "noremap <silent> <leader>" . i . " :" . i . "wincmd W<cr>"
-    " g{n} and M-{n} for tab switch
-    execute "noremap g" . i . " " . i . "gt"
-    execute "noremap <m-" . i . "> " . i . "gt"
+  " <leader>{n} for window switching
+  execute "noremap <silent> <leader>" . i . " :" . i . "wincmd W<cr>"
+  " g{n} and M-{n} for tab switch
+  execute "noremap g" . i . " " . i . "gt"
+  execute "noremap <m-" . i . "> " . i . "gt"
 endfor
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
@@ -224,28 +224,28 @@ let g:UltiSnipsExpandTrigger='<C-P>'
 " completion enter behaviour
 inoremap <silent> <cr> <C-r>=<SID>my_cr_function()<cr>
 function! s:my_cr_function() abort
-    return deoplete#mappings#smart_close_popup() . "\<cr>"
+  return deoplete#mappings#smart_close_popup() . "\<cr>"
 endfunction
 
 " translator
 let g:trans_dir = "~/apps/trans/"
 function! Trans()
-    exe system("mkdir -p " . g:trans_dir)
-    let l:caption = expand("<cword>")
-    if l:caption == ''
-        let l:word_path = g:trans_dir . "index.md"
-    else
-        let l:word = tolower(l:caption)
-        let l:word_path = g:trans_dir . l:word . ".txt"
-        if !filereadable(expand(l:word_path))
-            if system("command -v trans") == ''
-                echo("No trans executeble found.")
-            else
-                exe system("trans -no-ansi en: " . l:word . ">" . l:word_path)
-            endif
-        endif
+  exe system("mkdir -p " . g:trans_dir)
+  let l:caption = expand("<cword>")
+  if l:caption == ''
+    let l:word_path = g:trans_dir . "index.md"
+  else
+    let l:word = tolower(l:caption)
+    let l:word_path = g:trans_dir . l:word . ".txt"
+    if !filereadable(expand(l:word_path))
+      if system("command -v trans") == ''
+        echo("No trans executeble found.")
+      else
+        exe system("trans -no-ansi en: " . l:word . ">" . l:word_path)
+      endif
     endif
-    exe "e" fnameescape(l:word_path)
+  endif
+  exe "e" fnameescape(l:word_path)
 endfunction
 noremap <silent> <leader>ad :call Trans()<cr>
 noremap <silent> <leader>aD :tab sb<cr>:call Trans()<cr>
@@ -253,22 +253,22 @@ noremap <silent> <leader>aD :tab sb<cr>:call Trans()<cr>
 " lyrics
 let g:lyrics_dir = "~/apps/lyrics/"
 function! Lyrics()
-    exe system("mkdir -p " . g:lyrics_dir)
-    let l:caption = getline('.')
-    if l:caption == ''
-        let l:song_path = g:lyrics_dir . "index.md"
-    else
-        let l:song_name = substitute(tolower(l:caption), " ", "_", "g")
-        let l:song_path = g:lyrics_dir . l:song_name . ".txt"
-        if !filereadable(expand(l:song_path))
-            if system("command -v clyrics") == ''
-                echo("No clyrics executeble found.")
-            else
-                exe system("clyrics " . l:song_name . ">" . l:song_path)
-            endif
-        endif
+  exe system("mkdir -p " . g:lyrics_dir)
+  let l:caption = getline('.')
+  if l:caption == ''
+    let l:song_path = g:lyrics_dir . "index.md"
+  else
+    let l:song_name = substitute(tolower(l:caption), " ", "_", "g")
+    let l:song_path = g:lyrics_dir . l:song_name . ".txt"
+    if !filereadable(expand(l:song_path))
+      if system("command -v clyrics") == ''
+        echo("No clyrics executeble found.")
+      else
+        exe system("clyrics " . l:song_name . ">" . l:song_path)
+      endif
     endif
-    exe "e" fnameescape(l:song_path)
+  endif
+  exe "e" fnameescape(l:song_path)
 endfunction
 noremap <silent> <leader>al :call Lyrics()<cr>
 noremap <silent> <leader>aL :tab sb<cr>:call Lyrics()<cr>
@@ -279,8 +279,8 @@ command! -range -nargs=0 Underline       call s:CombineSelection(<line1>, <line2
 command! -range -nargs=0 DoubleUnderline call s:CombineSelection(<line1>, <line2>, '0333')
 command! -range -nargs=0 Strikethrough   call s:CombineSelection(<line1>, <line2>, '0336')
 function! s:CombineSelection(line1, line2, cp)
-    execute 'let char = "\u'.a:cp.'"'
-    execute a:line1.','.a:line2.'s/\%V[^[:cntrl:]]/&'.char.'/ge'
+  execute 'let char = "\u'.a:cp.'"'
+  execute a:line1.','.a:line2.'s/\%V[^[:cntrl:]]/&'.char.'/ge'
 endfunction
 vnoremap <silent> <leader>tO :Overline<cr>
 vnoremap <silent> <leader>tU :Underline<cr>
@@ -302,17 +302,17 @@ hi Normal guibg=NONE ctermbg=NONE
 
 " modes
 function! ToggleVar(var, message)
-    if a:var
-        if a:message != ''
-            echo a:message.' mode OFF'
-        endif
-        return 0
-    else
-        if a:message != ''
-            echo a:message.' mode ON'
-        endif
-        return 1
+  if a:var
+    if a:message != ''
+      echo a:message.' mode OFF'
     endif
+    return 0
+  else
+    if a:message != ''
+      echo a:message.' mode ON'
+    endif
+    return 1
+  endif
 endfunction
 " autosave buffers on focus loss mode
 let autoSaveMode = 1
@@ -332,23 +332,23 @@ nnoremap <silent> <leader>mc :call ToggleVar(&spell, 'spellchecker')<cr>:set spe
 " show interface mode
 let showInterfaceMode = 1
 function! ToggleInterface(if_show)
-    if a:if_show == 0
-        set nonumber
-        set norelativenumber
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        set number
-        set relativenumber
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
+  if a:if_show == 0
+    set nonumber
+    set norelativenumber
+    let s:hidden_all = 1
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
+  else
+    set number
+    set relativenumber
+    let s:hidden_all = 0
+    set showmode
+    set ruler
+    set laststatus=2
+    set showcmd
+  endif
 endfunction
 nnoremap <silent> <leader>mi :let showInterfaceMode=ToggleVar(showInterfaceMode, '')<cr>:call ToggleInterface(g:showInterfaceMode)<cr>
 " toggle table mode
@@ -454,12 +454,12 @@ nmap <silent> <leader>oW <plug>VimwikiTabIndex
 nmap <silent> <leader>os <plug>VimwikiUISelect
 nmap <silent> <leader>oi <plug>VimwikiDiaryIndex
 function! VimwikiMakeDiaryNoteFixed(count)
-    if a:count == 2
-        set spell
-    endif
-    echo a:count
-    let g:vimwiki_current_idx=v:count1 - 1
-    VimwikiMakeDiaryNote
+  if a:count == 2
+    set spell
+  endif
+  echo a:count
+  let g:vimwiki_current_idx=v:count1 - 1
+  VimwikiMakeDiaryNote
 endfunction
 nmap <silent> <leader>od :<c-u>:call VimwikiMakeDiaryNoteFixed(v:count)<cr>
 nmap <silent> <leader>oD :<C-U>let g:vimwiki_current_idx=v:count1 - 1<cr><plug>VimwikiTabMakeDiaryNote
@@ -514,3 +514,5 @@ au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
+" latex
+let g:tex_flavor = "latex"

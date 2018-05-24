@@ -4,7 +4,7 @@ outputdir="./output"
 mkdir -p $outputdir
 inputfilename="${@:$(($#))}"
 args="${@:1:$(($#-1))}"
-the_command="pdflatex $args -interaction nonstopmode -file-line-error -output-directory=\"$outputdir\" \"$inputfilename\""
+the_command="pdflatex $args -shell-escape -interaction nonstopmode -file-line-error -output-directory=\"$outputdir\" \"$inputfilename\""
 
 echo $the_command
 eval $the_command
