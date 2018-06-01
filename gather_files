@@ -7,7 +7,7 @@ for i in "${paths[@]}"
 do
     dir=$(dirname $i)
     mkdir -p $backupdir/$dir
-    cp -r ~/$i $backupdir/$dir
+    cp -a ~/$i $backupdir/$dir
 done
 
 find ./files \( -type f -o -type d \) -name '*history*' -exec rm -rf {} +

@@ -183,8 +183,8 @@ bindsym $leader+o resize grow width 10 px or 10 ppt
 # keyboard layout (input languages)
 # exec --no-startup-id xmodmap ~/.config/keymap
 exec --no-startup-id setxkbmap -option grp:switch,grp:caps_toggle,grp_led:caps us,ru
-bindsym $leader+Control+1 exec --no-startup-id "setxkbmap us,ru"
-bindsym $leader+Control+2 exec --no-startup-id "setxkbmap us,ua"
+bindsym $leader+Shift+comma exec --no-startup-id "setxkbmap us,ru"
+bindsym $leader+Shift+period exec --no-startup-id "setxkbmap us,ua"
 # screenshots
 bindsym Print exec --no-startup-id scrot ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
 bindsym Shift+Print exec --no-startup-id sleep 0.5 && scrot -s ~/stuff/images/screenshots/%Y-%m-%d-%T-screenshot.png
