@@ -52,7 +52,7 @@ bomi
 ### coding
 vscode
 ### messagers
-telegram-desktop-bin
+telegram-desktop-bin slack-desktop
 
 ## programming
 ### environments
