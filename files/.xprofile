@@ -16,3 +16,4 @@ export PATH=$path_addition$PATH
 export BROWSER=/usr/bin/chromium
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
+export APP_DATA_SYNC_DIR=~/Dropbox/appdata

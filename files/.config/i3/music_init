@@ -6,7 +6,7 @@ LAYOUT=$2
 TERMINAL=$3
 
 visualizer="$TERMINAL -c visualizer -e vis"
-lyrics="$TERMINAL -c subs -e nvim -c ':e ~/apps/lyrics/index.md | setl spell'"
+lyrics="$TERMINAL -c subs -e nvim -c ':e $APP_DATA_SYNC_DIR/lyrics/index.md | setl spell'"
 pandora="$TERMINAL -c pianobar -e pianobar"
 focus="sleep 0.25 && i3 '[class=\"pianobar\"]' focus"
 

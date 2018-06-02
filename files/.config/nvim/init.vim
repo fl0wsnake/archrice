@@ -227,8 +227,9 @@ function! s:my_cr_function() abort
   return deoplete#mappings#smart_close_popup() . "\<cr>"
 endfunction
 
+" apps
 " translator
-let g:trans_dir = "~/apps/trans/"
+let g:trans_dir = $APP_DATA_SYNC_DIR . "/trans/"
 function! Trans()
   exe system("mkdir -p " . g:trans_dir)
   let l:caption = expand("<cword>")
@@ -251,7 +252,7 @@ noremap <silent> <leader>ad :call Trans()<cr>
 noremap <silent> <leader>aD :tab sb<cr>:call Trans()<cr>
 
 " lyrics
-let g:lyrics_dir = "~/apps/lyrics/"
+let g:lyrics_dir = $APP_DATA_SYNC_DIR . "/lyrics/"
 function! Lyrics()
   exe system("mkdir -p " . g:lyrics_dir)
   let l:caption = getline('.')

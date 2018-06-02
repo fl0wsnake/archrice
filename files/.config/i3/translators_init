@@ -5,7 +5,7 @@ WORKSPACENAME=$1
 LAYOUT=$2
 TERMINAL=$3
 
-nvim="$TERMINAL -e nvim -c ':e ~/apps/trans/index.md | setl spell'"
+nvim="$TERMINAL -e nvim -c ':e $APP_DATA_SYNC_DIR/trans/index.md | setl spell'"
 
 $I3_DIR/init_layout "$WORKSPACENAME" "$LAYOUT" "$nvim"
 
